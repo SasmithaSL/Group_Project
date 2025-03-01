@@ -55,4 +55,29 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('admin.login')->with('success', 'Logout successful.');
     }
+
+
+
+    public function showUsers()
+    {
+        $users = User::all(); // Fetch all users from the database
+        return view('admin.users', compact('users')); // Pass users to the view
+    }
+
+    public function deleteUser(User $user)
+{
+    if ($user->role == 'admin') {
+        return redirect()->route('admin.users')->with('error', 'You cannot delete an admin user.');
+    }
+
+    $user->delete(); // Delete the user
+
+    return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
+}
+
+    
+
+
+
+    
 }

@@ -25,22 +25,23 @@ Route::middleware([CheckUser::class])->group(function () {
 });
 
 
-
-
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', function () { return view('admin.login'); })->name('login');
     Route::get('/register', function () { return view('admin.register'); })->name('register');
+    
+    // Define the admin-logout route here
+    Route::post('/admin-logout', [AdminAuthController::class, 'adminLogout'])->name('logout');
 
+    // Admin login and registration routes
     Route::post('/admin-login', [AdminAuthController::class, 'adminLogin'])->name('login-form');
     Route::post('/admin-register', [AdminAuthController::class, 'adminRegister'])->name('register-form');
-    Route::post('/admin-logout', [AdminAuthController::class, 'adminLogout'])->name('logout');
 
     Route::middleware([CheckAdmin::class])->group(function () {
         Route::get('/index', function () { return view('admin.index'); })->name('index');
         Route::get('/manage-books', function () { return view('admin.manage-books'); })->name('manage-books');
         Route::get('/borrow-requests', function () { return view('admin.borrow-requests'); })->name('borrow-requests');
         Route::get('/announcements', function () { return view('admin.announcements'); })->name('announcements');
-        Route::get('/users', function () { return view('admin.users'); })->name('users');
+        Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
+        Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
     });
 });
