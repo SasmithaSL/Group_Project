@@ -29,19 +29,39 @@
                                 <div class="woocommerce-login">
                                     <div class="company-info signin-register">
                                         
+                                                @if (\Session::has('success'))
+                                                    <div class="alert alert-success">
+                                                        <strong>{{ \Session::get('success') }}</strong>
+                                                    </div>
+                                                @endif
+                                                @if (\Session::has('delete'))
+                                                    <div class="alert alert-danger">
+                                                        <strong>{{ \Session::get('delete') }}</strong>
+                                                    </div>
+                                                @endif
+                                                @if (count($errors) > 0)
+                                                    <div class="alert alert-danger">
+                                                        <ul>
+                                                            @foreach ($errors->all() as $error)
+                                                                <li>{{ $error }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
                                                     <div class="company-detail new-account bg-light margin-right">
                                                         <div class="new-user-head">
                                                             <h2>Create New Account</h2>
                                                             <span class="underline left"></span>
                                                         </div>
 
-                                                        <form class="login" method="post">
-                                                            <p class="form-row form-row-first input-required">
+                                                        <form class="login" method="post" action="/user-register" enctype="multipart/form-data">
+                                                        @csrf
+                                                         <p class="form-row form-row-first input-required">
                                                                 <label>
                                                                     <h5>Full Name</h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="text" id="username1" name="name" class="input-text">
                                                             </p>
 
                                                             <p class="form-row form-row-first input-required">
@@ -49,7 +69,7 @@
                                                                     <h5>Password </h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="text" id="username1" name="password" class="input-text">
                                                             </p>
 
                                                             <p class="form-row form-row-first input-required">
@@ -57,7 +77,7 @@
                                                                     <h5>Re type Password </h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="text" id="username1" name="password_confirmation" class="input-text">
                                                             </p>
 
                                                             <p class="form-row form-row-first input-required">
@@ -65,7 +85,7 @@
                                                                     <h5>Email Address </h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="email" id="username1" name="email" class="input-text">
                                                             </p>
 
                                                             <p class="form-row form-row-first input-required">
@@ -73,16 +93,14 @@
                                                                     <h5>Phone Number</h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="number" id="username1" name="number" class="input-text">
                                                             </p>
-   
-   
 
                                                             <div class="clear"></div>
                                                             <input type="submit" value="Signup" name="signup" class="button btn btn-default">
                                                             <div class="clear"></div>
                                                         </form> 
-                                                    </div>
+                                          </div>
                                     </div>
                                 </div>
                             </div>

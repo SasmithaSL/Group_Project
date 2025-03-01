@@ -8,11 +8,8 @@
                                 <div class="navbar-header">
                                     <div class="navbar-brand">
                                         <h1>
-                                        <a href="{{ url('/') }}">
-
-
+                                            <a href="{{ url('/') }}">
                                                 <img src="{{ asset('assets/images/libraria-logo-v1.png') }}" alt="Logo">
-
                                             </a>
                                         </h1>
                                     </div>
@@ -30,65 +27,71 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="topbar-links">
-                                                <a href="login"><i class="fa fa-lock"></i>Login</a>
-                                                <a href="register"></i>Register</a>
-                                                
-                                                <span>|</span>
-                                                <div class="header-cart dropdown">
-                                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <small>0</small>
-                                                    </a>
-                                                    <div class="dropdown-menu cart-dropdown">
-                                                        <ul>
-                                                            <li class="clearfix">
-                                                                <img src="{{ asset('assets/images/header-cart-image-01.jpg') }}" alt="cart item">
+                                        <div class="topbar-links">
+                                        @if(Auth::guard()->check())  
+                                            <a href="#"><i class="fa fa-user"></i> {{ Auth::guard()->user()->name }}</a>
+                                            
+                                            <form action="{{ route('user-logout') }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                 <span>|</span>
 
-                                                                <div class="item-info">
-                                                                    <div class="name">
-                                                                        <a href="#">The Great Gatsby</a>
-                                                                    </div>
-                                                                    <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                    <div class="price">1 X $10.00</div>
-                                                                </div>
-                                                                <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                            </li>
-                                                            <li class="clearfix">
-                                                                <img src="{{ asset('assets/images/header-cart-image-02.jpg') }}" alt="cart item">
+                                                <a href="#" onclick="this.closest('form').submit(); return false;" class="text-red-600 hover:text-red-800">
+                                                    <i class="fa fa-sign-out"></i> Log out
+                                                </a>
+                                            </form>
+                                        @else
+                                            <a href="login"><i class="fa fa-lock"></i> Login</a>
+                                            <span>|</span>
+                                            <a href="register"><i class="fa fa-sign-out"></i> Register</a>
 
-                                                                <div class="item-info">
-                                                                    <div class="name">
-                                                                        <a href="#">The Great Gatsby</a>
-                                                                    </div>
-                                                                    <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                    <div class="price">1 X $10.00</div>
-                                                                </div>
-                                                                <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                            </li>
-                                                            <li class="clearfix">
-                                                                <img src="{{ asset('assets/images/header-cart-image-03.jpg') }}" alt="cart item">
-                                                                <div class="item-info">
-                                                                    <div class="name">
-                                                                        <a href="#">The Great Gatsby</a>
-                                                                    </div>
-                                                                    <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
-                                                                    <div class="price">1 X $10.00</div>
-                                                                </div>
-                                                                <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
-                                                            </li>
-                                                        </ul>
-                                                        <div class="cart-total">
-                                                            <div class="title">SubTotal</div>
-                                                            <div class="price">$30.00</div>
+                                        @endif
+
+
+                                        <div class="header-cart dropdown">
+                                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                            </a>
+                                            <div class="dropdown-menu cart-dropdown">
+                                                <ul>
+                                                    <li class="clearfix">
+                                                        <img src="{{ asset('assets/images/header-cart-image-01.jpg') }}" alt="cart item">
+                                                        <div class="item-info">
+                                                            <div class="name"><a href="#">The Great Gatsby</a></div>
+                                                            <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
+                                                            <div class="price">1 X $10.00</div>
                                                         </div>
-                                                        <div class="cart-buttons">
-                                                            <a href="cart.html" class="btn btn-dark-gray">View Cart</a>
-                                                            <a href="checkout.html" class="btn btn-primary">Checkout</a>
+                                                        <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+                                                    </li>
+                                                    <li class="clearfix">
+                                                        <img src="{{ asset('assets/images/header-cart-image-02.jpg') }}" alt="cart item">
+                                                        <div class="item-info">
+                                                            <div class="name"><a href="#">The Great Gatsby</a></div>
+                                                            <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
+                                                            <div class="price">1 X $10.00</div>
                                                         </div>
-                                                    </div>
+                                                        <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+                                                    </li>
+                                                    <li class="clearfix">
+                                                        <img src="{{ asset('assets/images/header-cart-image-03.jpg') }}" alt="cart item">
+                                                        <div class="item-info">
+                                                            <div class="name"><a href="#">The Great Gatsby</a></div>
+                                                            <div class="author"><strong>Author:</strong> F. Scott Fitzgerald</div>
+                                                            <div class="price">1 X $10.00</div>
+                                                        </div>
+                                                        <a class="remove" href="#"><i class="fa fa-trash-o"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="cart-total">
+                                                    <div class="title">SubTotal</div>
+                                                    <div class="price">$30.00</div>
+                                                </div>
+                                                <div class="cart-buttons">
+                                                    <a href="cart.html" class="btn btn-dark-gray">View Cart</a>
+                                                    <a href="checkout.html" class="btn btn-primary">Checkout</a>
                                                 </div>
                                             </div>
+                                        </div>
+                                    </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -98,22 +101,15 @@
                                             <a data-toggle="dropdown" class="dropdown-toggle disabled" href="/">Home</a>
                                             
                                         </li>
-                                        
                                         <li class="dropdown">
                                             <a class="dropdown-toggle"  onclick="window.location.href='{{ route('books-media') }}'" style="cursor: pointer;">Books &amp; Media
                                             </a>
                                         </li>
-
                                         <li class="dropdown">   
                                             <a data-toggle="dropdown"   onclick="window.location.href='{{ route('news-events') }}'" style="cursor: pointer;" >News &amp; Events</a>
                                         </li>
-                            
-
                                         <li><a href="cart">Cart</a></li>
                                         <li><a href="checkout">Checkout</a></li>
-
-
-                                        
                                         <li><a href="services">Services</a></li>
                                         <li><a href="contact">Contact</a></li>
                                     </ul>

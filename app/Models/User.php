@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'number',
+        'role',
     ];
 
     /**
@@ -45,4 +47,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    
 }
