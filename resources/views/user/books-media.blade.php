@@ -153,7 +153,7 @@
                                                             <h3 class="entry-title"><a href="books-media-detail-v1.html">The Great Gatsby</a></h3>
                                                             <ul>
                                                                 <li><strong>Author:</strong> F. Scott Fitzgerald</li>
-                                                                <li><strong>ISBN:</strong> 9781581573268</li>
+                                                                <li><strong>ISBN:</strong> +119</li>
                                                             </ul>
                                                         </header>
                                                         <div class="entry-content">
