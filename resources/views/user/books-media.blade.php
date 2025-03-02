@@ -91,12 +91,7 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <div class="filter-result">Showing items 1 to 9 of 19 total</div>
                                             </div>
-                                            <div class="col-md-3 col-sm-3 pull-right">
-                                                <div class="filter-toggle">
-                                                    <a href="books-media-gird-view-v1.html" class="active"><i class="glyphicon glyphicon-th-large"></i></a>
-                                                    <a href="books-media-list-view.html"><i class="glyphicon glyphicon-th-list"></i></a>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="books-gird">
@@ -104,7 +99,8 @@
                                             @foreach($books as $book)
                                             <li>
                                                 <figure>
-                                                <img src="{{ $book->image ? asset('storage/' . $book->image) : '/assets/images/books-media/gird-view/book-media-grid-12.jpg' }}" alt="Book" class="book-image">                                                    <figcaption>
+                                                    <img src="{{ $book->image ? asset('storage/' . $book->image) : '/assets/images/books-media/gird-view/book-media-grid-12.jpg' }}" alt="Book" class="book-image">
+                                                    <figcaption>
                                                         <p><strong>{{ $book->title }}</strong></p>
                                                         <p><strong>Author:</strong> {{ $book->author }}</p>
                                                     </figcaption>
@@ -150,17 +146,36 @@
                                         </ul>
                                     </div>
 
-                                    <nav class="navigation pagination text-center">
-                                        <h2 class="screen-reader-text">Posts navigation</h2>
-                                        <div class="nav-links">
-                                            <a class="prev page-numbers" href="#."><i class="fa fa-long-arrow-left"></i> Previous</a>
-                                            <a class="page-numbers" href="#.">1</a>
-                                            <span class="page-numbers current">2</span>
-                                            <a class="page-numbers" href="#.">3</a>
-                                            <a class="page-numbers" href="#.">4</a>
-                                            <a class="next page-numbers" href="#.">Next <i class="fa fa-long-arrow-right"></i></a>
-                                        </div>
-                                    </nav>
+                                <!-- Custom Pagination -->
+                                <nav class="navigation pagination text-center">
+                                    <h2 class="screen-reader-text">Posts navigation</h2>
+                                    <div class="nav-links">
+                                        {{-- Previous Link --}}
+                                        @if($books->onFirstPage())
+                                            <span class="prev page-numbers disabled"><i class="fa fa-long-arrow-left"></i> Previous</span>
+                                        @else
+                                            <a class="prev page-numbers" href="{{ $books->previousPageUrl() }}"><i class="fa fa-long-arrow-left"></i> Previous</a>
+                                        @endif
+
+                                        {{-- Page Links --}}
+                                        @foreach($books->getUrlRange(1, $books->lastPage()) as $page => $url)
+                                            @if ($page == $books->currentPage())
+                                                <span class="page-numbers current">{{ $page }}</span>
+                                            @else
+                                                <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
+                                            @endif
+                                        @endforeach
+
+                                        {{-- Next Link --}}
+                                        @if($books->hasMorePages())
+                                            <a class="next page-numbers" href="{{ $books->nextPageUrl() }}">Next <i class="fa fa-long-arrow-right"></i></a>
+                                        @else
+                                            <span class="next page-numbers disabled">Next <i class="fa fa-long-arrow-right"></i></span>
+                                        @endif
+                                    </div>
+                                </nav>
+
+                                    
                                 </div>
                                 <div class="col-md-3 col-md-pull-9">
                                     <aside id="secondary" class="sidebar widget-area" data-accordion-group>

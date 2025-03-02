@@ -31,44 +31,79 @@
               </nav>
             </div>
             <div class="row">
-              <div class="col-md-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Default form</h4>
-                    <p class="card-description"> Basic form layout </p>
-                    <form class="forms-sample" method="POST" action="{{ route('admin.books.store') }}" enctype="multipart/form-data">
-                      @csrf
-                      <div class="form-group">
-                          <label for="title">Book Title</label>
-                          <input type="text" class="form-control" id="title" name="title" placeholder="Enter book title" required>
-                      </div>
+                  
+                <div class="col-md-6 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add a new book</h4>
 
-                      <div class="form-group">
-                          <label for="author">Author</label>
-                          <input type="text" class="form-control" id="author" name="author" placeholder="Enter Author name" required>
-                      </div>
+                <!-- Success and Error Messages -->
+                @if (session('success'))
+                    <div class="alert form-control text-white" style="background-color: #28a745; border: none;" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                    </div>
+                @endif
 
-                      <div class="form-group">
-                          <label for="description">Book Description</label>
-                          <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter book description" required></textarea>
-                      </div>
+                @if (session('delete'))
+                    <div class="alert form-control text-white" style="background-color: #dc3545; border: none;" role="alert">
+                        <strong>{{ session('delete') }}</strong>
+                    </div>
+                @endif
 
-                      <div class="form-group">
-                          <label for="isbn">ISBN</label>
-                          <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Enter ISBN" required>
-                      </div>
+                @if ($errors->any())
+                    <div class="alert form-control" style="background-color: #f8d7da; color: #721c24; border: none;" role="alert">
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                      <div class="form-group">
-                          <label for="image">Book Image</label>
-                          <input type="file" class="form-control" id="image" name="image">
-                      </div>
+                <form class="forms-sample" method="POST" action="{{ route('admin.books.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label for="title">Book Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter book title" required>
+                    </div>
 
-                      <button type="submit" class="btn btn-primary mr-2">Add Book</button>
-                  </form>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" class="form-control" id="author" name="author" placeholder="Enter Author name" required>
+                    </div>
 
-                  </div>
+                    <div class="form-group">
+                        <label for="description">Book Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter book description" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Enter ISBN" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Book Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
+                    </div>
+
+                        <button type="submit" class="btn btn-primary mr-2">Add Book</button>
+                    </form>
                 </div>
-              </div>
+            </div>
+        </div>
+
+            <!-- Auto-hide alerts after 4 seconds -->
+            <script>
+                setTimeout(function() {
+                    document.querySelectorAll('.alert').forEach(alert => {
+                        alert.style.transition = 'opacity 0.5s';
+                        alert.style.opacity = '0';
+                        setTimeout(() => alert.remove(), 400);
+                    });
+                }, 4000);
+            </script>
+
               <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">

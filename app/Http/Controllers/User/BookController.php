@@ -8,8 +8,8 @@ use App\Models\Book;
 
 class BookController extends Controller {
     public function index() {
-        $books = Book::latest()->get();
+        // Paginate the books, you can adjust the number (10) to control the number of books per page
+        $books = Book::latest()->paginate(9);
         return view('user.books-media', compact('books'));
     }
-    
 }
