@@ -101,7 +101,7 @@
                       </table>
                     </div>
                   </div>
-                </div>
+                </div>  
               </div>
             </div>
 
@@ -109,9 +109,8 @@
            
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-          <footer class="footer">
-      
-          </footer>
+@include('admin.footer')
+          
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

@@ -19219,3 +19219,10 @@ a:focus {
 .bx-wrapper .bx-pager.bx-default-pager a.active {
   background: #ff7236;
 }
+.book-image {
+  width: 271px;
+  height: 414px;
+  object-fit: cover; /* Ensures the image fills the space without distortion */
+  border-radius: 5px; /* Optional: Adds rounded corners */
+}
+
