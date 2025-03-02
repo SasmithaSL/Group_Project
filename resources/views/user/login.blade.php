@@ -28,20 +28,39 @@
                             <div class="woocommerce">
                                 <div class="woocommerce-login">
                                     <div class="company-info signin-register">
-                                        
-                                                    <div class="company-detail new-account bg-light margin-right">
+                                    @if (\Session::has('success'))
+                                        <div class="alert alert-success">
+                                            <strong>{{ \Session::get('success') }}</strong>
+                                        </div>
+                                    @endif
+                                    @if (\Session::has('delete'))
+                                        <div class="alert alert-danger">
+                                            <strong>{{ \Session::get('delete') }}</strong>
+                                        </div>
+                                    @endif
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                  <div class="company-detail new-account bg-light margin-right">
                                                         <div class="new-user-head">
                                                         <h2 style="text-align: center;">Sign in</h2>
                                                         <span class="underline left"></span>
                                                         </div>
 
-                                                        <form class="login" method="post">
+                                                        <form class="login" action="/user-login" method="post">
+                                                          @csrf
                                                             <p class="form-row form-row-first input-required">
                                                                 <label>
-                                                                    <h5>Full Name</h5>
+                                                                    <h5>Email</h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="email" name="email" class="input-text" required>
                                                             </p>
 
                                                             <p class="form-row form-row-first input-required">
@@ -49,7 +68,7 @@
                                                                     <h5>Password </h5>
                                                                     <span class="first-letter"></span>  
                                                                 </label>
-                                                                <input type="text" id="username1" name="username" class="input-text">
+                                                                <input type="text" name="password" class="input-text" required>
                                                             </p>
                                                             <div class="clear"></div>
                                                             <input type="submit" value="Signup" name="signup" class="button btn btn-default">
