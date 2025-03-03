@@ -26,6 +26,7 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/services', function () { return view('user.services'); })->name('services');
     Route::get('/contact', function () { return view('user.contact'); })->name('contact');
 });
+//test
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
