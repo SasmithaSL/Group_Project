@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="col-md-3 col-md-pull-9">
                                     <aside id="secondary" class="sidebar widget-area" data-accordion-group>
-                                        <div class="widget widget_related_search open" data-accordion>
+                                        <!-- <div class="widget widget_related_search open" data-accordion>
                                             <h4 class="widget-title" data-control>Related Searches</h4>
                                             <div data-content>
                                                 <div data-accordion>
@@ -247,7 +247,7 @@
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
-                                        </div>
+                                        </div> -->
                                         <div class="widget widget_narrow_search" data-accordion>
                                             <h4 class="widget-title" data-control>Narrow your search</h4>
                                             <div data-content>
@@ -314,68 +314,70 @@
                                             <h4 class="widget-title">New Releases</h4>
                                             <ul>
                                                 <li><a href="#">Books</a></li>
-                                                <li><a href="#">eBooks</a></li>
-                                                <li><a href="#">DVDS</a></li>
+                                      <!-- <li><a href="#">eBooks</a></li> -->
+                                                <!-- <li><a href="#">DVDS</a></li> -->
                                                 <li><a href="#">Magazines</a></li>
-                                                <li><a href="#">Audio</a></li>
-                                                <li><a href="#">eAudio</a></li>
+                                                <li><a href="#">Articals</a></li>
+                                                <li><a href="#">Journals</a></li>
+                                                <!-- <li><a href="#">Audio</a></li>
+                                                <li><a href="#">eAudio</a></li> -->
                                             </ul>
                                             <div class="clearfix"></div>
                                         </div>
-                                        <div class="widget widget_recent_entries">
-                                            <h4 class="widget-title">On-Order Items</h4>
-                                            <ul>
-                                                <li>
-                                                    <figure>
-                                                        <img src="/assets/images/order-item-01.jpg" alt="product" />
-                                                    </figure>
-                                                    <a href="#">The Sonic Boom</a>
-                                                    <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                    <span><strong>ISBN:</strong> 978158157</span>
-                                                    <div class="rating">
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                                <li>
-                                                    <figure>
-                                                        <img src="/assets/images/order-item-02.jpg" alt="product" />
-                                                    </figure>
-                                                    <a href="#">The Sonic Boom</a>
-                                                    <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                    <span><strong>ISBN:</strong> 978158157</span>
-                                                    <div class="rating">
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                                <li>
-                                                    <figure>
-                                                        <img src="/assets/images/order-item-03.jpg" alt="product" />
-                                                    </figure>
-                                                    <a href="#">The Sonic Boom</a>
-                                                    <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                    <span><strong>ISBN:</strong> 978158157</span>
-                                                    <div class="rating">
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                        <span>☆</span>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </li>
-                                            </ul>
-                                            <div class="clearfix"></div>
-                                        </div>
+                                            <!-- <div class="widget widget_recent_entries">
+                                                <h4 class="widget-title">On-Order Items</h4>
+                                                <ul>
+                                                    <li>
+                                                        <figure>
+                                                            <img src="/assets/images/order-item-01.jpg" alt="product" />
+                                                        </figure>
+                                                        <a href="#">The Sonic Boom</a>
+                                                        <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
+                                                        <span><strong>ISBN:</strong> 978158157</span>
+                                                        <div class="rating">
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </li>
+                                                    <li>
+                                                        <figure>
+                                                            <img src="/assets/images/order-item-02.jpg" alt="product" />
+                                                        </figure>
+                                                        <a href="#">The Sonic Boom</a>
+                                                        <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
+                                                        <span><strong>ISBN:</strong> 978158157</span>
+                                                        <div class="rating">
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </li>
+                                                    <li>
+                                                        <figure>
+                                                            <img src="/assets/images/order-item-03.jpg" alt="product" />
+                                                        </figure>
+                                                        <a href="#">The Sonic Boom</a>
+                                                        <span class="price"><strong>Author:</strong> F. Scott Fitzgerald</span>
+                                                        <span><strong>ISBN:</strong> 978158157</span>
+                                                        <div class="rating">
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                            <span>☆</span>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div> -->
                                     </aside>
                                 </div>
                             </div>

@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="zxx">
-@include('user.head')
-        
+@include('user.head')        
  @include('user.header')
-
-
-
-
     <body>
-
-
         <!-- Start: Page Banner -->
         <section class="page-banner services-banner">
             <div class="container">
