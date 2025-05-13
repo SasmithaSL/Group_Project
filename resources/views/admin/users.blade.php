@@ -45,13 +45,11 @@
               </div>
 
             </div>
-         
-           
-          
             <div class="row ">
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
+
                     <h4 class="card-title">Manage Users</h4>
                     <div class="table-responsive">
                       <table class="table">
@@ -86,20 +84,20 @@
                                 <td>{{ $user->number }}</td>
                                 <td>{{ $user->created_at->format('d M Y') }}</td>
                                 <td>{{ ucfirst($user->role) }}</td>
-                                <td> <!-- Action column with Delete button -->
-                                    <!-- Delete Form -->
+                                <td> 
                                     <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline;">
                                       @csrf
                                       @method('DELETE')
-                                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                      
-                                  </form>
+                                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>                                     
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                       </table>
                     </div>
+
+                    
                   </div>
                 </div>  
               </div>

@@ -9,7 +9,7 @@
                                     <div class="navbar-brand">
                                         <h1>
                                             <a href="{{ url('/') }}">
-                                                <img src="{{ asset('assets/images/libraria-logo-v1.png') }}" alt="Logo">
+                                                <img src="{{ asset('assets/images/logo.png') }}" alt="Logo">
                                             </a>
                                         </h1>
                                     </div>
@@ -20,11 +20,11 @@
                                 <div class="header-topbar hidden-sm hidden-xs">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="topbar-info">
+                                            <!-- <div class="topbar-info">
                                                 <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>+119</a>
                                                 <span>/</span>
                                                 <a href="mailto:support@libraria.com"><i class="fa fa-envelope"></i>support@libraria.com</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="col-sm-6">
                                         <div class="topbar-links">
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="navbar-collapse hidden-sm hidden-xs">
                                     <ul class="nav navbar-nav">
-                                        <li class="dropdown active">
+                                        <li class="dropdown">
                                             <a data-toggle="dropdown" class="dropdown-toggle disabled" href="/">Home</a>
                                             
                                         </li>
