@@ -12,7 +12,8 @@ return new class extends Migration {
             $table->string('author');
             $table->text('description');
             $table->string('isbn')->unique();
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
+
             $table->timestamps();
         });
     }

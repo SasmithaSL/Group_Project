@@ -55,7 +55,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
         
         <!-- Title -->
-        <title>..:: LIBRARIA ::..</title>
+        <title>..::  BookHaven ::..</title>
         
        <!-- Favicon -->
        <!-- <img src="{{ asset('assets/images/favicon.ico') }}" alt="Logo"> -->
