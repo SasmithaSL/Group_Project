@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Controllers\Admin\BookController as AdminBookController;
 use App\Http\Controllers\User\BookController as UserBookController;
+use App\Http\Controllers\CartController;
+
  
 
 // User Routes
@@ -25,6 +27,10 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/checkout', function () { return view('user.checkout'); })->name('checkout');
     Route::get('/services', function () { return view('user.services'); })->name('services');
     Route::get('/contact', function () { return view('user.contact'); })->name('contact');
+
+    Route::get('/cart/add/{book}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+
 });
 
 // Admin Routes
