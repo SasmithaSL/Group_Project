@@ -96,42 +96,42 @@
                                 </div>
                                 
                                 <div class="books-gird">
-                                <ul>
-                                    @foreach($books as $book)
-                                    <li>
-                                        <figure>
-                                            <img src="data:image/jpeg;base64,{{ $book->image }}"
-                                                alt="{{ $book->title }}" />
-                                            <figcaption>
-                                                <p><strong>{{ $book->title }}</strong></p>
-                                                <p><strong>Author:</strong> {{ $book->author }}</p>
-                                            </figcaption>
-                                        </figure>
-                                        <div class="single-book-box">
-                                            <div class="post-detail">
-                                                <div class="books-social-sharing">
+                                    <ul>
+                                        @foreach($books as $book)
+                                        <li>
+                                            <figure>
+                                                <img src="data:image/jpeg;base64,{{ $book->image }}"
+                                                    alt="{{ $book->title }}" />
+                                                <figcaption>
+                                                    <p><strong>{{ $book->title }}</strong></p>
+                                                    <p><strong>Author:</strong> {{ $book->author }}</p>
+                                                </figcaption>
+                                            </figure>
+                                            <div class="single-book-box">
+                                                <div class="post-detail">
+                                                    <div class="books-social-sharing">
+                                                    </div>
+                                                    <div class="optional-links">
+                                                    </div>
+                                                    <header class="entry-header">
+                                                        <h3 class="entry-title"><a href="#">{{ $book->title }}</a></h3>
+                                                        <ul>
+                                                            <li><strong>Author:</strong> {{ $book->author }}</li>
+                                                            <li><strong>ISBN:</strong> {{ $book->isbn }}</li>
+                                                        </ul>
+                                                    </header>
+                                                    <div class="entry-content">
+                                                        <p>{{ Str::limit($book->description, 100) }}</p>
+                                                    </div>
+                                                    <footer class="entry-footer">
+                                                        <a class="btn btn-primary" href="#">Add to cart</a>
+                                                    </footer>
                                                 </div>
-                                                <div class="optional-links">
-                                                </div>
-                                                <header class="entry-header">
-                                                    <h3 class="entry-title"><a href="#">{{ $book->title }}</a></h3>
-                                                    <ul>
-                                                        <li><strong>Author:</strong> {{ $book->author }}</li>
-                                                        <li><strong>ISBN:</strong> {{ $book->isbn }}</li>
-                                                    </ul>
-                                                </header>
-                                                <div class="entry-content">
-                                                    <p>{{ Str::limit($book->description, 100) }}</p>
-                                                </div>
-                                                <footer class="entry-footer">
-                                                    <a class="btn btn-primary" href="#">Read More</a>
-                                                </footer>
                                             </div>
-                                        </div>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
 
 
                             

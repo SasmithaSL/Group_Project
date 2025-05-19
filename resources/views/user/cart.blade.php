@@ -38,6 +38,7 @@
                                                  
                                                 </ul>
                                                 <div class="tab-content">
+
                                                     <div id="sectionA" class="tab-pane fade in active">
                                                         <form method="post" action="http://libraria.demo.presstigers.com/cart-page.html">
 
@@ -143,7 +144,42 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
+                                                        </form>
+                                                    </div>
 
+                                                    
+                                                    <div id="sectionB" class="tab-pane fade in">
+                                                        <h5>Lorem Ipsum Dolor</h5>
+                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                                                    </div>
+                                                    <div id="sectionC" class="tab-pane fade in">
+                                                        <h5>Lorem Ipsum Dolor</h5>
+                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                                                    </div>
+                                                    <div id="sectionD" class="tab-pane fade in">
+                                                        <h5>Lorem Ipsum Dolor</h5>
+                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                                                    </div>                                                    
+                                                    <div id="sectionE" class="tab-pane fade in">
+                                                        <h5>Lorem Ipsum Dolor</h5>
+                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                                                    </div>                                                    
+                                                    <div id="sectionF" class="tab-pane fade in">
+                                                        <h5>Lorem Ipsum Dolor</h5>
+                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .entry-content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+                                                                
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Function to handle dropdown selection for each dropdown
@@ -215,41 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                                                 setupDropdown('dropdownMenu2', 'dropdownOptions2');
                                                             });
                                                             </script> 
-
-
-                                                        </form>
-                                                    </div>
-                                                    <div id="sectionB" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>
-                                                    <div id="sectionC" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>
-                                                    <div id="sectionD" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>                                                    
-                                                    <div id="sectionE" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>                                                    
-                                                    <div id="sectionF" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- .entry-content -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
         <!-- End: Cart Section -->
         
         <!-- Start: Social Network -->
