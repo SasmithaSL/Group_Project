@@ -92,9 +92,6 @@
                   <div class="col-md-9 col-md-push-3 news-events-list-view">
                      <div class="news-list-box">
                         <div class="single-news-list">
-                         
-                         
-                         
                            @foreach($events as $index => $event)
                            <div class="event-card {{ $index % 2 == 0 ? 'image-left' : 'image-right' }}">
                               @if($index % 2 == 0)
@@ -170,8 +167,6 @@
                               @endif
                            </div>
                            @endforeach
-
-                           
                            <nav class="navigation pagination text-center">
                               <h2 class="screen-reader-text">Posts navigation</h2>
                               <div class="nav-links">

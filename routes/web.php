@@ -25,12 +25,10 @@ Route::get('/news-events', [UserEventController::class, 'index'])->name('news-ev
 
 Route::middleware([CheckUser::class])->group(function () {
     Route::get('/books-media', [UserBookController::class, 'index'])->name('books-media');
-    // Removed conflicting news-events route
     Route::get('/cart', function () { return view('user.cart'); })->name('cart');
     Route::get('/checkout', function () { return view('user.checkout'); })->name('checkout');
     Route::get('/services', function () { return view('user.services'); })->name('services');
     Route::get('/contact', function () { return view('user.contact'); })->name('contact');
-
     Route::get('/cart/add/{book}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
 });
@@ -42,7 +40,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/admin-logout', [AdminAuthController::class, 'adminLogout'])->name('logout');
     Route::post('/admin-login', [AdminAuthController::class, 'adminLogin'])->name('login-form');
     Route::post('/admin-register', [AdminAuthController::class, 'adminRegister'])->name('register-form');
-
     Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
 
 
