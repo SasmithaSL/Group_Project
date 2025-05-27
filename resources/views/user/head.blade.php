@@ -74,7 +74,8 @@
         <link rel="stylesheet" type="text/css" href="/assets/css/jquery.accordion.css"> 
         <link rel="stylesheet" type="text/css" href="/assets/css/responsivetable.css" />
 
-        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
        
 
         

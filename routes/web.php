@@ -10,6 +10,7 @@ use App\Http\Controllers\User\BookController as UserBookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\User\EventController as UserEventController;
+use App\Http\Controllers\User\CartController as UserCartController;
 
  
 // User Routes
@@ -31,6 +32,10 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/contact', function () { return view('user.contact'); })->name('contact');
     Route::get('/cart/add/{book}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::post('/cart/process', [UserCartController::class, 'process'])->name('cart.process');
+    Route::get('/cart/remove/{id}', [UserCartController::class, 'remove'])->name('cart.remove');
+
+
 });
 
 // Admin Routes
