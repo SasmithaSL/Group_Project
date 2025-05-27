@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\User\EventController as UserEventController;
 use App\Http\Controllers\User\CartController as UserCartController;
+use App\Http\Controllers\User\OrderController as OrderController;
 
  
 // User Routes
@@ -34,6 +35,10 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
     Route::post('/cart/process', [UserCartController::class, 'process'])->name('cart.process');
     Route::get('/cart/remove/{id}', [UserCartController::class, 'remove'])->name('cart.remove');
+    Route::get('/order-list', [OrderController::class, 'viewOrders'])->name('orders.view');
+    Route::get('/orders/{id}/qr-download', [OrderController::class, 'downloadQr'])->name('orders.qr.download');
+    Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
+
 
 
 });

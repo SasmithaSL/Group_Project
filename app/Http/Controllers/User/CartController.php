@@ -4,9 +4,11 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str; // ✅ Add this
-use App\Models\Order;       // ✅ Add this
-use App\Models\Cart;        // ✅ Add this if using Cart model
+use Illuminate\Support\Str; 
+use App\Models\Order;      
+use App\Models\Cart;       
+use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CartController extends Controller
 {
@@ -19,11 +21,10 @@ class CartController extends Controller
 
         $user = auth()->user();
 
-        // ✅ Create the order with UUID
         $order = Order::create([
             'user_id' => $user->id,
             'order_code' => (string) Str::uuid(),
-            'book_ids' => json_encode([]), // Fill later below
+            'book_ids' => json_encode([]), 
         ]);
 
         $bookIds = [];
@@ -32,15 +33,13 @@ class CartController extends Controller
             $cartItem = Cart::find($itemId);
             if ($cartItem) {
                 $bookIds[] = $cartItem->book_id;
-                $cartItem->delete(); // remove from cart if needed
+                $cartItem->delete(); 
             }
         }
 
-        // ✅ Save book IDs in JSON field
         $order->book_ids = $bookIds;
         $order->save();
 
-        // ✅ Return order data to front-end (for QR generation)
         return response()->json([
             'success' => true,
             'order_code' => $order->order_code,
@@ -50,7 +49,6 @@ class CartController extends Controller
 
     public function remove($id)
     {
-        // Option 1: If you're using a Cart model and database
         $cartItem = Cart::find($id);
 
         if ($cartItem) {
@@ -60,4 +58,5 @@ class CartController extends Controller
 
         return redirect()->back()->with('error', 'Book not found in cart.');
     }
+
 }

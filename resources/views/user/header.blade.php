@@ -109,7 +109,7 @@
                                             <a data-toggle="dropdown"   onclick="window.location.href='{{ route('news-events') }}'" style="cursor: pointer;" >News &amp; Events</a>
                                         </li>
                                         <li><a href="cart">Cart</a></li>
-                                        <li><a href="checkout">Checkout</a></li>
+                                        <li><a href="order-list">Orders</a></li>
                                         <li><a href="services">Services</a></li>
                                         <li><a href="contact">Contact</a></li>
                                     </ul>
