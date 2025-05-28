@@ -1,266 +1,125 @@
-<!DOCTYPE html>
-<html lang="zxx">
-@include('user.head')
-        
- @include('user.header')
+@extends('user.layout')
 
-    <body>
-        <!-- Start: Page Banner -->
-        <section class="page-banner services-banner">
-            <div class="container">
-                <div class="banner-header">
-                    <h2>Cart Page</h2>
-                    <span class="underline center"></span>
-                </div>
-               
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+@endsection
+
+@section('content')
+    <section class="page-banner services-banner">
+        <div class="container">
+            <div class="banner-header">
+                <h2>Cart Page</h2> <span class="underline center"></span>
             </div>
-        </section>
-        <!-- End: Page Banner -->
-        <!-- Start: Cart Section -->
-        <div id="content" class="site-content">
-            <div id="primary" class="content-area">
-                <main id="main" class="site-main">
-                    <div class="cart-main">
-                        <div class="container">
+        </div>
+    </section>
+
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main">
+                <div class="cart-main">
+                    <div class="container">
                         <div class="center-content">
-                                        <h2 class="section-title">Review your selected books </h2>
-                                        <span class="underline center"></span>
-                                        <!-- <p class="lead">The standard chunk of Lorem Ipsum used since</p> -->
-                                        <div class="clearfix"></div>
-                                    </div>
-                            <div class="row">
-                               
-                                <div class="col-md-12">
-                                    <div class="page type-page status-publish hentry">
-                                        <div class="entry-content">
-                                            <div class="woocommerce table-tabs" id="responsiveTabs">
-                                                <ul class="nav nav-tabs">
-                                                 
-                                                </ul>
-                                                <div class="tab-content">
-                                                    <div id="sectionA" class="tab-pane fade in active">
-                                                        <form method="post" action="http://libraria.demo.presstigers.com/cart-page.html">
+                            @if (session('success'))
+                                <div class="alert alert-success text-center mt-3">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
 
-                                                            <table class="table table-bordered shop_table cart">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="product-name"> </th>
-                                                                    <th class="product-name">Title</th>
-                                                                    <th class="product-quantity">Action</th>
-                                                                    <th class="product-price"></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr class="cart_item">
-                                                                    <td data-title="cbox" class="product-cbox">
-                                                                        <span>
-                                                                            <input type="checkbox" id="cbox3" value="first_checkbox">
-                                                                        </span>
-                                                                    </td>
-                                                                    <td data-title="Product" class="product-name">
-                                                                        <span class="product-thumbnail">
-                                                                            <a href="#"><img src="/assets/images/cart/cart-product-1.jpg" alt="cart-product-1"></a>
-                                                                        </span>
-                                                                        <span class="product-detail">
-                                                                            <a href="#" class="book-title"><strong>The Sonic Boom</strong></a>
-                                                                            <span><strong>Author:</strong> Joel Beckerma</span>
-                                                                            <span><strong>ISBN:</strong> 78451269</span>
-                                                                        </span>
-                                                                    </td>
-                                                                    <td data-title="action" class="product-action">
-                                                                        <div class="dropdown">
-                                                                            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" id="dropdownMenu3">Request to Borrow <b class="caret"></b></a>
-                                                                            <ul class="dropdown-menu" id="dropdownOptions3">
-                                                                                <li><a href="#" data-value="Request to Borrow">Request to Borrow</a></li>
-                                                                                <li><a href="#" data-value="Remove from Cart">Remove from Cart</a></li>
-                                                                                <li><a href="#" data-value="Place a Hold">Place a Hold</a></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="product-pridsfce">
-                                                                        <button class="btn btn-primary">Proceed</button>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="cart_item">
-                                                                    <td>
-                                                                        <span data-title="cbox" class="product-cbox">
-                                                                            <input type="checkbox" id="cbox1" value="first_checkbox">
-                                                                        </span>
-                                                                    </td>
-                                                                    <td data-title="Product" class="product-name">
-                                                                        <span class="product-thumbnail">
-                                                                            <a href="#"><img src="/assets/images/cart/cart-product-2.jpg" alt="cart-product-2"></a>
-                                                                        </span>
-                                                                        <span class="product-detail">
-                                                                            <a href="#" class="book-title"><strong>The Great Gatsby</strong></a>
-                                                                            <span><strong>Author:</strong> F. Scott Fitzgerald</span>
-                                                                            <span><strong>ISBN:</strong> 78452597</span>
-                                                                        </span>
-                                                                    </td>
-                                                                    <td data-title="action" class="product-action">
-                                                                        <div class="dropdown">
-                                                                            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" id="dropdownMenu1">Request to Borrow <b class="caret"></b></a>
-                                                                            <ul class="dropdown-menu" id="dropdownOptions1">
-                                                                                <li><a href="#" data-value="Request to Borrow">Request to Borrow</a></li>
-                                                                                <li><a href="#" data-value="Remove from Cart">Remove from Cart</a></li>
-                                                                                <li><a href="#" data-value="Place a Hold">Place a Hold</a></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="product-price">
-                                                                        <button class="btn btn-primary">Proceed</button>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr class="cart_item">
-                                                                    <td>
-                                                                        <span data-title="cbox" class="product-cbox">
-                                                                            <input type="checkbox" id="cbox2" value="first_checkbox">
-                                                                        </span>
-                                                                    </td>
-                                                                    <td data-title="Product" class="product-name">
-                                                                        <span class="product-thumbnail">
-                                                                            <a href="#"><img src="/assets/images/cart/cart-product-3.jpg" alt="cart-product-3"></a>
-                                                                        </span>
-                                                                        <span class="product-detail">
-                                                                            <a href="#" class="book-title"><strong>The missing piece</strong></a>
-                                                                            <span><strong>Author:</strong>Kevin egan</span>
-                                                                            <span><strong>ISBN:</strong> 44979747</span>
-                                                                        </span>
-                                                                    </td>
-                                                                    <td data-title="action" class="product-action">
-                                                                        <div class="dropdown">
-                                                                            <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" id="dropdownMenu2">Request to Borrow <b class="caret"></b></a>
-                                                                            <ul class="dropdown-menu" id="dropdownOptions2">
-                                                                                <li><a href="#" data-value="Request to Borrow">Request to Borrow</a></li>
-                                                                                <li><a href="#" data-value="Remove from Cart">Remove from Cart</a></li>
-                                                                                <li><a href="#" data-value="Place a Hold">Place a Hold</a></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td class="product-price">
-                                                                        <button class="btn btn-primary">Proceed</button>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
+                            <h2 class="section-title">Review your selected books</h2>
+                            <span class="underline center"></span>
+                        </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Function to handle dropdown selection for each dropdown
-    function setupDropdown(dropdownId, optionsId) {
-        const dropdown = document.getElementById(dropdownId);
-        const options = document.querySelectorAll(`#${optionsId} a`);
-
-        options.forEach(option => {
-            option.addEventListener('click', function(e) {
-                e.preventDefault();
-                const selectedText = this.getAttribute('data-value');
-                
-                // Remove existing caret if it exists
-                const existingCaret = dropdown.querySelector('.caret');
-                if (existingCaret) {
-                    existingCaret.remove();
-                }
-
-                // Update the button text
-                dropdown.childNodes[0].nodeValue = selectedText + ' ';
-
-                // Add a single caret
-                const caret = document.createElement('b');
-                caret.className = 'caret';
-                dropdown.appendChild(caret);
-            });
-        });
-    }
-
-    // Setup each dropdown
-    setupDropdown('dropdownMenu3', 'dropdownOptions3');
-    setupDropdown('dropdownMenu1', 'dropdownOptions1');
-    setupDropdown('dropdownMenu2', 'dropdownOptions2');
-});
-</script>
-
-                                                            <script>
-                                                            document.addEventListener('DOMContentLoaded', function() {
-                                                                // Function to handle dropdown selection for each dropdown
-                                                                function setupDropdown(dropdownId, optionsId) {
-                                                                    const dropdown = document.getElementById(dropdownId);
-                                                                    const options = document.querySelectorAll(`#${optionsId} a`);
-
-                                                                    options.forEach(option => {
-                                                                        option.addEventListener('click', function(e) {
-                                                                            e.preventDefault();
-                                                                            const selectedText = this.getAttribute('data-value');
-                                                                            
-                                                                            // Remove existing caret if it exists
-                                                                            const existingCaret = dropdown.querySelector('.caret');
-                                                                            if (existingCaret) {
-                                                                                existingCaret.remove();
-                                                                            }
-
-                                                                            // Update the button text
-                                                                            dropdown.childNodes[0].nodeValue = selectedText + ' ';
-
-                                                                            // Add a single caret
-                                                                            const caret = document.createElement('b');
-                                                                            caret.className = 'caret';
-                                                                            dropdown.appendChild(caret);
-                                                                        });
-                                                                    });
-                                                                }
-
-                                                                // Setup each dropdown
-                                                                setupDropdown('dropdownMenu3', 'dropdownOptions3');
-                                                                setupDropdown('dropdownMenu1', 'dropdownOptions1');
-                                                                setupDropdown('dropdownMenu2', 'dropdownOptions2');
-                                                            });
-                                                            </script> 
-
-
-                                                        </form>
-                                                    </div>
-                                                    <div id="sectionB" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>
-                                                    <div id="sectionC" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>
-                                                    <div id="sectionD" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>                                                    
-                                                    <div id="sectionE" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
-                                                    </div>                                                    
-                                                    <div id="sectionF" class="tab-pane fade in">
-                                                        <h5>Lorem Ipsum Dolor</h5>
-                                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.</p>
+                        <form id="cartForm">
+                            <table class="table table-bordered shop_table cart">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center align-middle">
+                                            <i class="fas fa-check-square fa-xl" title="Select"></i>
+                                        </th>
+                                        <th scope="col">Book Details</th>
+                                        <th scope="col" class="text-center align-middle">
+                                            <i class="fas fa-cog fa-2x" title="Actions"></i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($cartItems as $item)
+                                        <tr class="cart_item">
+                                            <td class="text-center align-middle">
+                                                <input type="checkbox" name="selected_books[]" value="{{ $item->id }}"
+                                                    data-title="{{ $item->book->title }}"
+                                                    data-image="data:image/jpeg;base64,{{ $item->book->image }}">
+                                            </td>
+                                            <td>
+                                                <div style="display: flex; align-items: center;">
+                                                    <img src="data:image/jpeg;base64,{{ $item->book->image }}"
+                                                        alt="{{ $item->book->title }}"
+                                                        style="height: 111px; width: 100px; object-fit: cover; margin-right: 15px;">
+                                                    <div>
+                                                        <strong>{{ $item->book->title }}</strong><br>
+                                                        <span><strong>Author:</strong> {{ $item->book->author }}</span><br>
+                                                        <span><strong>ISBN:</strong> {{ $item->book->isbn }}</span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div><!-- .entry-content -->
-                                    </div>
+                                            </td>
+                                            <td class="text-center align-middle">
+                                                <a href="#" class="text-danger remove-btn" title="Remove"
+                                                    data-url="{{ route('cart.remove', $item->id) }}">
+                                                    <i class="fas fa-trash-alt fa-2x"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center">Your cart is empty.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+
+                            @if (count($cartItems))
+                                <div class="d-flex justify-content-end mt-4 text-right">
+                                    <button type="button" id="checkoutBtn" class="read-more-btn" style="margin-bottom: 20px;">
+                                        <i class="fas fa-shopping-cart me-2"></i> Checkout Selected
+                                    </button>
+                                </div>
+                            @endif
+
+                        </form>
+
+                        {{-- Modal --}}
+                        <div id="checkoutModal" class="modal" style="display: none;">
+                            <div class="modal-content"
+                                style="width: 400px; margin: auto; padding: 20px; background: white; border-radius: 10px; position: relative;">
+                                <button id="closeModalBtn"
+                                    style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px;">&times;</button>
+
+                                <h3 class="text-center">Confirm Order</h3>
+                                <div id="bookList" style="margin-top: 15px;"></div>
+                                <div style="text-align: center; margin-top: 15px;">
+                                    <button id="placeOrderBtn" class="read-more-btn">Place Order</button>
+                                </div>
+
+                                <div id="loading" style="display:none;">Processing...</div>
+                                <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+                                    <div id="qrCodeContainer" style="margin-bottom: 15px;"></div>
+                                    <a id="downloadQrBtn" style="display:none;" download="order-qr.png"
+                                        class="read-more-btn">Download QR</a>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                </main>
-            </div>
+                </div>
+            </main>
         </div>
-        <!-- End: Cart Section -->
-        
-        <!-- Start: Social Network -->
-        <section class="social-network section-padding">
-          
-        </section>
-        <!-- End: Social Network -->
-                
-        @include('user.footer')
-        
-    </body>
+    </div>
+@endsection
 
-
-</html>
+@section('scripts')
+    <script>
+        const cartProcessUrl = "{{ route('cart.process') }}";
+        const csrfToken = "{{ csrf_token() }}";
+    </script>
+    <script src="{{ asset('js/cart.js') }}"></script>
+@endsection

@@ -55,7 +55,7 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
         
         <!-- Title -->
-        <title>..::  BookHaven ::..</title>
+        <title>BookHaven</title>
         
        <!-- Favicon -->
        <!-- <img src="{{ asset('assets/images/favicon.ico') }}" alt="Logo"> -->
@@ -74,7 +74,8 @@
         <link rel="stylesheet" type="text/css" href="/assets/css/jquery.accordion.css"> 
         <link rel="stylesheet" type="text/css" href="/assets/css/responsivetable.css" />
 
-        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
        
 
         

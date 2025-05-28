@@ -1,0 +1,4 @@
+.orders td,
+.orders th {
+    vertical-align: middle !important;
+}

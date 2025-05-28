@@ -98,7 +98,7 @@
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
-              <span class="menu-title">Announcements</span>
+              <span class="menu-title">Events</span>
             </a>
           </li>
 

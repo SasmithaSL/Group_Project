@@ -56,8 +56,6 @@ class AuthController extends Controller
         return redirect()->route('admin.login')->with('success', 'Logout successful.');
     }
 
-
-
     public function showUsers()
     {
         $users = User::all(); // Fetch all users from the database
@@ -65,19 +63,38 @@ class AuthController extends Controller
     }
 
     public function deleteUser(User $user)
-{
-    if ($user->role == 'admin') {
-        return redirect()->route('admin.users')->with('error', 'You cannot delete an admin user.');
+    {
+        if ($user->role == 'admin') {
+            return redirect()->route('admin.users')->with('error', 'You cannot delete an admin user.');
+        }
+
+        $user->delete(); // Delete the user
+
+        return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
 
-    $user->delete(); // Delete the user
+    // Store the new user
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'number' => [
+                'required',
+                'digits:10',  
+            ],
+            'role' => 'required|in:user,admin',
+        ]);
 
-    return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
-}
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'number' => $request->number,
+            'role' => $request->role,
+        ]);
 
-    
-
-
-
-    
+        return redirect()->route('admin.users')->with('success', 'User created successfully.');
+    }
 }
