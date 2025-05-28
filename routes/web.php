@@ -57,13 +57,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update'); // Fixed: moved inside admin group
         Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store');
         Route::get('/borrow-requests', function () { return view('admin.borrow-requests'); })->name('borrow-requests');
-
         Route::get('/announcements', [AdminEventController::class, 'index'])->name('announcements');
         Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
         Route::delete('/events/{id}', [AdminEventController::class, 'destroy'])->name('events.destroy');
         Route::put('/events/{id}', [AdminEventController::class, 'update'])->name('events.update');
         Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
         Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
+        Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
 
        
 

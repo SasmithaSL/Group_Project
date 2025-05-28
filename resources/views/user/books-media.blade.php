@@ -124,7 +124,7 @@
                                                         <p>{{ Str::limit($book->description, 100) }}</p>
                                                     </div>
                                                     <footer class="entry-footer">
-<a class="btn btn-primary" href="{{ route('cart.add', $book->id) }}">Add to cart</a>
+                                                        <a class="btn btn-primary" href="{{ route('cart.add', $book->id) }}">Add to cart</a>
                                                     </footer>
                                                 </div>
                                             </div>
