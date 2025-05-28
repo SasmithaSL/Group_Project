@@ -79,7 +79,7 @@
 
                             @if (count($cartItems))
                                 <div class="d-flex justify-content-end mt-4 text-right">
-                                    <button type="button" id="checkoutBtn" class="btn btn-success btn-lg shadow">
+                                    <button type="button" id="checkoutBtn" class="read-more-btn" style="margin-bottom: 20px;">
                                         <i class="fas fa-shopping-cart me-2"></i> Checkout Selected
                                     </button>
                                 </div>
@@ -97,14 +97,14 @@
                                 <h3 class="text-center">Confirm Order</h3>
                                 <div id="bookList" style="margin-top: 15px;"></div>
                                 <div style="text-align: center; margin-top: 15px;">
-                                    <button id="placeOrderBtn" class="btn btn-success">Place Order</button>
+                                    <button id="placeOrderBtn" class="read-more-btn">Place Order</button>
                                 </div>
 
                                 <div id="loading" style="display:none;">Processing...</div>
                                 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
                                     <div id="qrCodeContainer" style="margin-bottom: 15px;"></div>
                                     <a id="downloadQrBtn" style="display:none;" download="order-qr.png"
-                                        class="btn btn-info">Download QR</a>
+                                        class="read-more-btn">Download QR</a>
                                 </div>
                             </div>
                         </div>

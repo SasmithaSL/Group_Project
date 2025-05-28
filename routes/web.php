@@ -24,7 +24,6 @@ Route::post('/user-logout', [AuthController::class, 'userLogout'])->name('user-l
 Route::get('/books', [UserBookController::class, 'index'])->name('books.index');
 Route::get('/news-events', [UserEventController::class, 'index'])->name('news-events');
 
-
 Route::middleware([CheckUser::class])->group(function () {
     Route::get('/books-media', [UserBookController::class, 'index'])->name('books-media');
     Route::get('/cart', function () { return view('user.cart'); })->name('cart');
@@ -38,9 +37,6 @@ Route::middleware([CheckUser::class])->group(function () {
     Route::get('/order-list', [OrderController::class, 'viewOrders'])->name('orders.view');
     Route::get('/orders/{id}/qr-download', [OrderController::class, 'downloadQr'])->name('orders.qr.download');
     Route::post('/orders/{order}/cancel', [OrderController::class, 'cancel'])->name('orders.cancel');
-
-
-
 });
 
 // Admin Routes
@@ -52,14 +48,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/admin-register', [AdminAuthController::class, 'adminRegister'])->name('register-form');
     Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
 
-
     Route::middleware([CheckAdmin::class])->group(function () {
         Route::get('/index', function () { return view('admin.index'); })->name('index');
-        Route::get('/manage-books', function () { return view('admin.manage-books'); })->name('manage-books');
+        Route::get('/manage-books', [AdminBookController::class, 'index'])->name('manage-books');
+        Route::get('/books', [AdminBookController::class, 'index'])->name('books.index');
+        Route::post('/books', [AdminBookController::class, 'store'])->name('books.store');
+        Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
+        Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update'); // Fixed: moved inside admin group
         Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store');
         Route::get('/borrow-requests', function () { return view('admin.borrow-requests'); })->name('borrow-requests');
-        Route::get('/announcements', function () { return view('admin.announcements'); })->name('announcements');
+
+        Route::get('/announcements', [AdminEventController::class, 'index'])->name('announcements');
+        Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
+        Route::delete('/events/{id}', [AdminEventController::class, 'destroy'])->name('events.destroy');
+        Route::put('/events/{id}', [AdminEventController::class, 'update'])->name('events.update');
         Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
         Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
+
+       
+
     });
 });
