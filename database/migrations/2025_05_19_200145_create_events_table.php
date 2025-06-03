@@ -21,7 +21,7 @@ public function up()
         $table->time('start_time');
         $table->time('end_time');
         $table->string('venue');
-        $table->string('image')->nullable(); // for image upload path
+        $table->string('image')->nullable();
         $table->timestamps();
     });
 }

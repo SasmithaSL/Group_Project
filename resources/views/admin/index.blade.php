@@ -22,88 +22,90 @@
         <div class="main-panel">
           <div class="content-wrapper">
            
-            <div class="row">
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">$12.34</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+          <div class="row">
+                  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-9">
+                            <div class="d-flex align-items-center align-self-start">
+                              <h3 class="mb-0">{{ $stats['pending_borrow_requests'] }}</h3>
+                              <p class="text-warning ml-2 mb-0 font-weight-medium">Pending</p>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="icon icon-box-warning">
+                              <span class="mdi mdi-book-open-page-variant icon-item"></span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success ">
-                          <span class="mdi mdi-arrow-top-right icon-item"></span>
-                        </div>
-                      </div>
-                    </div>
-                    <h6 class="text-muted font-weight-normal">Potential growth</h6>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">$17.34</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
-                        </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success">
-                          <span class="mdi mdi-arrow-top-right icon-item"></span>
-                        </div>
+                        <h6 class="text-muted font-weight-normal">Pending Borrow Requests</h6>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Revenue current</h6>
                   </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">$12.34</h3>
-                          <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+                  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-9">
+                            <div class="d-flex align-items-center align-self-start">
+                              <h3 class="mb-0">{{ $stats['pending_returns'] }}</h3>
+                              <p class="text-danger ml-2 mb-0 font-weight-medium">Due</p>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="icon icon-box-danger">
+                              <span class="mdi mdi-book-minus icon-item"></span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-danger">
-                          <span class="mdi mdi-arrow-bottom-left icon-item"></span>
-                        </div>
+                        <h6 class="text-muted font-weight-normal">Books Pending Return</h6>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Daily Income</h6>
                   </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-9">
-                        <div class="d-flex align-items-center align-self-start">
-                          <h3 class="mb-0">$31.53</h3>
-                          <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+                  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-9">
+                            <div class="d-flex align-items-center align-self-start">
+                              <h3 class="mb-0">{{ $stats['approved_books'] }}</h3>
+                              <p class="text-success ml-2 mb-0 font-weight-medium">Ready</p>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="icon icon-box-success">
+                              <span class="mdi mdi-book-open-page-variant icon-item"></span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-3">
-                        <div class="icon icon-box-success ">
-                          <span class="mdi mdi-arrow-top-right icon-item"></span>
-                        </div>
+                        <h6 class="text-muted font-weight-normal">Books Approved</h6>
                       </div>
                     </div>
-                    <h6 class="text-muted font-weight-normal">Expense current</h6>
+                  </div>
+                  <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-9">
+                            <div class="d-flex align-items-center align-self-start">
+                              <h3 class="mb-0">{{ $stats['active_users'] }}</h3>
+                              <p class="text-info ml-2 mb-0 font-weight-medium">Total</p>
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="icon icon-box-info">
+                              <span class="mdi mdi-account-multiple icon-item"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Active Users</h6>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+
+            
             <div class="row">
               <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">

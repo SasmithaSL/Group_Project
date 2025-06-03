@@ -13,6 +13,7 @@ use App\Http\Controllers\User\EventController as UserEventController;
 use App\Http\Controllers\User\CartController as UserCartController;
 use App\Http\Controllers\User\OrderController as OrderController;
 use App\Http\Controllers\Admin\BorrowRequestController; 
+use App\Http\Controllers\Admin\DashboardController;
 
  
 // User Routes
@@ -71,6 +72,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
         Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
         Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
+        Route::get('/index', [DashboardController::class, 'index'])->name('admin.index');
+
     });
 });
 
