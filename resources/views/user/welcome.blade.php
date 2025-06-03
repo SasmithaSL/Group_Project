@@ -487,7 +487,7 @@
                                     </li>
                                 </ul>
                                 <h3><a href=".html#">Sustainability in Libraries: Green Initiatives</a></h3>
-<p>Discover how libraries are going green with eco-friendly buildings and digital resources, reducing their carbon footprint and promoting sustainability.</p>                            </div>
+                                    <p>Discover how libraries are going green with eco-friendly buildings and digital resources, reducing their carbon footprint and promoting sustainability.</p>                            </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -498,7 +498,7 @@
         
        
         <!-- Start: Newsletter -->
-        <section class="newsletter section-padding">
+        <!-- <section class="newsletter section-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
@@ -514,7 +514,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- End: Newsletter -->
         
          @include('user.footer')

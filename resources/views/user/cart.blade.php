@@ -16,7 +16,7 @@
     <div id="content" class="site-content">
         <div id="primary" class="content-area">
             <main id="main" class="site-main">
-               <!-- resources\views\user\cart.blade.php -->
+        <!-- resources\views\user\cart.blade.php -->
                     <div class="cart-main">
                         <div class="container">
                             <div class="center-content">
@@ -79,10 +79,19 @@
                                 </table>
 
                                 @if (count($cartItems))
-                                    <div class="d-flex justify-content-end mt-4 text-right">
-                                        <button type="button" id="checkoutBtn" class="read-more-btn" style="margin-bottom: 20px;">
-                                            <i class="fas fa-shopping-cart me-2"></i> Request Books
-                                        </button>
+                                    <div class="d-flex justify-content-between align-items-center mt-4" style="margin-bottom: 20px;">
+                                        <div>
+                                            <button type="button" id="selectAllBtn" class="btn btn-outline-primary me-2" style="padding: 8px 16px; height: 38px;">
+                                                <i class="fas fa-check-square me-1"></i> SELECT ALL
+                                            </button>
+                                            <button type="button" id="deselectAllBtn" class="btn btn-outline-secondary" style="padding: 8px 16px; height: 38px;">
+                                                <i class="fas fa-square me-1"></i> DESELECT ALL
+                                            </button>
+                                            <button type="button" id="checkoutBtn" class="read-more-btn">
+                                                <i class="fas fa-shopping-cart me-2"></i> REQUEST BOOKS
+                                            </button>
+                                        </div>
+                                       
                                     </div>
                                 @endif
 
@@ -127,6 +136,24 @@
                         const loading = document.getElementById('loading');
                         const successMessage = document.getElementById('successMessage');
                         const okBtn = document.getElementById('okBtn');
+                        const selectAllBtn = document.getElementById('selectAllBtn');
+                        const deselectAllBtn = document.getElementById('deselectAllBtn');
+
+                        // Select All functionality
+                        selectAllBtn.addEventListener('click', function() {
+                            const checkboxes = document.querySelectorAll('input[name="selected_books[]"]');
+                            checkboxes.forEach(function(checkbox) {
+                                checkbox.checked = true;
+                            });
+                        });
+
+                        // Deselect All functionality
+                        deselectAllBtn.addEventListener('click', function() {
+                            const checkboxes = document.querySelectorAll('input[name="selected_books[]"]');
+                            checkboxes.forEach(function(checkbox) {
+                                checkbox.checked = false;
+                            });
+                        });
 
                         // Show modal when checkout button is clicked
                         checkoutBtn.addEventListener('click', function() {

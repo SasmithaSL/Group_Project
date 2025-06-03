@@ -1,11 +1,12 @@
  <!-- Required meta tags -->
  <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Book Haven</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../../admin/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../../admin/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
@@ -81,7 +82,6 @@
     <script src="/admin/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
     <!-- End plugin js for this page -->
     <script src="/admin/assets/js/dashboard.js"></script>
-
 
       <!-- container-scroller -->
     <!-- plugins:js -->

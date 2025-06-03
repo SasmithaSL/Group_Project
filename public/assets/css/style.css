@@ -10311,7 +10311,7 @@ a:focus {
 }
 .news-events.banner {
   background-attachment: fixed;
-  background-image: url(/assets/images/news-event/home-v1-news-event-banner.jpg);
+  /* background-image: url(/assets/images/news-event/home-v1-news-event-banner.jpg); */
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -10323,7 +10323,7 @@ a:focus {
   }
 }
 .news-events.banner h2 {
-  color: #fff;
+  color: black;
 }
 .news-events.banner .lead {
   color: #bebebe;
@@ -19534,3 +19534,19 @@ a:focus {
                     max-height: 300px;
                 }
             }
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    z-index: 9999;
+}
+.success-popup {
+    background-color: #28a745;
+}
+.error-popup {
+    background-color: #dc3545;
+}

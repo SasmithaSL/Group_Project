@@ -1,5 +1,4 @@
 <?php 
-// routes\web.php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthController;
@@ -13,7 +12,7 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\User\EventController as UserEventController;
 use App\Http\Controllers\User\CartController as UserCartController;
 use App\Http\Controllers\User\OrderController as OrderController;
-use App\Http\Controllers\Admin\BorrowRequestController; // Add this import
+use App\Http\Controllers\Admin\BorrowRequestController; 
 
  
 // User Routes
@@ -58,13 +57,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
         Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
         Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store');
-        
-        // Borrow Requests Routes
         Route::get('/borrow-requests', [BorrowRequestController::class, 'index'])->name('borrow-requests');
         Route::post('/orders/{id}/accept', [BorrowRequestController::class, 'acceptOrder'])->name('orders.accept');
         Route::post('/orders/{id}/reject', [BorrowRequestController::class, 'rejectOrder'])->name('orders.reject');
         Route::post('/orders/{id}/returned', [BorrowRequestController::class, 'markAsReturned'])->name('orders.returned');
-        
+        Route::post('/orders/{id}/issue', [BorrowRequestController::class, 'issueOrder'])->name('orders.issue');
         Route::get('/announcements', [AdminEventController::class, 'index'])->name('announcements');
         Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
         Route::delete('/events/{id}', [AdminEventController::class, 'destroy'])->name('events.destroy');
@@ -74,3 +71,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
     });
 });
+

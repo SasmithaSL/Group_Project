@@ -107,7 +107,7 @@
                                     <div class="contact-area">
                                         <div class="container">
                                            
-                                        <div class="contact-form bg-light margin-right">
+                                        <!-- <div class="contact-form bg-light margin-right">
                                                             <h2>Send us a message</h2>
                                                             <span class="underline left"></span>
                                                             <div class="contact-fields">
@@ -155,7 +155,7 @@
                                                                 </form> 
                                                             </div>                                                                   
                                                         </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

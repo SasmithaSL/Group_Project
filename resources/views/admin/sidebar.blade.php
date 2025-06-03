@@ -3,15 +3,14 @@
             <div class="profile-desc">
               <div class="profile-pic">
                 <div class="count-indicator">
-                  <img class="img-xs rounded-circle " src="/admin/assets/images/faces/face15.jpg" alt="">
+                  <img class="img-xs rounded-circle " src="/admin/assets/images/faces/admin1.jpg" alt="">
                   <span class="count bg-success"></span>
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Admin </h5>
+                  <h5 class="mb-0 font-weight-normal">Admin Panel </h5>
                   <!-- <span>Gold Member</span> -->
                 </div>
               </div>
-              <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
               <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
                 <a href="#" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
@@ -59,22 +58,7 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <!-- <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
-              </span>
-              <span class="menu-title">Basic UI Elements</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
-          </li> -->
+          
           <li class="nav-item menu-items">
             <a class="nav-link" href="manage-books">
               <span class="menu-icon">  
@@ -110,14 +94,4 @@
               <span class="menu-title">Manage Users</span>
             </a>
           </li>
-
-          
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="#">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-              <span class="menu-title">test</span>
-            </a>
-          </li>
-        </ul>
+</ul>

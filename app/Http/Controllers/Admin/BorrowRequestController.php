@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Book;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class BorrowRequestController extends Controller
 {
@@ -40,40 +41,144 @@ class BorrowRequestController extends Controller
                 ]);
             }
 
-            // Update order status and set borrow dates
-            $borrowedAt = Carbon::now();
-            $dueAt = $borrowedAt->copy()->addDays(14); // 14 days borrowing period
-
+            // Update order status to approved (ready to be issued)
             $order->update([
-                'status' => 'approved',
-                'borrowed_at' => $borrowedAt,
-                'due_at' => $dueAt,
+                'status' => 'approved'
             ]);
-
-            // Generate QR code
-            $qrData = json_encode([
-                'order_code' => $order->order_code,
-                'book_ids' => $order->book_ids,
-                'borrowed_at' => $borrowedAt->toDateString(),
-                'due_at' => $dueAt->toDateString(),
-            ]);
-
-            $qrImage = QrCode::format('png')
-                ->size(300)
-                ->generate($qrData);
-
-            $qrBase64 = base64_encode($qrImage);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Order accepted successfully!',
-                'qr_code' => 'data:image/png;base64,' . $qrBase64
             ]);
         } catch (\Exception $e) {
             Log::error('Accept Order Error: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'An error occurred while accepting the order.'
+            ]);
+        }
+    }
+
+    public function issueOrder(Request $request, $orderId)
+    {
+        try {
+            Log::info('Issue Order Request Started', [
+                'order_id' => $orderId,
+                'request_data' => $request->all()
+            ]);
+
+            $order = Order::findOrFail($orderId);
+            
+            Log::info('Order Found', [
+                'order_id' => $orderId,
+                'current_status' => $order->status,
+                'order_details' => $order->toArray()
+            ]);
+            
+            if ($order->status !== 'approved') {
+                Log::warning('Order Issue Failed - Invalid Status', [
+                    'order_id' => $orderId,
+                    'current_status' => $order->status,
+                    'required_status' => 'approved'
+                ]);
+                
+                return response()->json([
+                    'success' => false, 
+                    'message' => 'Only approved orders can be issued. Current status: ' . $order->status
+                ]);
+            }
+
+            // Check if the database schema supports the issued status
+            try {
+                DB::statement("SELECT 1 FROM orders WHERE status = 'issued' LIMIT 1");
+            } catch (\Exception $e) {
+                Log::error('Database Schema Issue - issued status not supported', [
+                    'error' => $e->getMessage()
+                ]);
+                
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Database schema error: issued status not supported. Please run the migration.'
+                ]);
+            }
+
+            // Update order status and set issue/borrow dates
+            $issuedAt = Carbon::now();
+            $dueAt = $issuedAt->copy()->addDays(14); // 14 days borrowing period
+
+            $updateData = [
+                'status' => 'issued',
+                'issued_at' => $issuedAt,
+                'due_at' => $dueAt,
+            ];
+
+            // Keep borrowed_at for backward compatibility if column exists
+            if (Schema::hasColumn('orders', 'borrowed_at')) {
+                $updateData['borrowed_at'] = $issuedAt;
+            }
+
+            Log::info('Attempting to update order', [
+                'order_id' => $orderId,
+                'update_data' => $updateData
+            ]);
+
+            $updated = $order->update($updateData);
+
+            if (!$updated) {
+                Log::error('Order update failed', [
+                    'order_id' => $orderId
+                ]);
+                
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to update order status.'
+                ]);
+            }
+
+            Log::info('Order updated successfully', [
+                'order_id' => $orderId,
+                'new_status' => $order->fresh()->status
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Books issued successfully!',
+            ]);
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            Log::error('Order not found', [
+                'order_id' => $orderId,
+                'error' => $e->getMessage()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Order not found.'
+            ]);
+            
+        } catch (\Illuminate\Database\QueryException $e) {
+            Log::error('Database Query Error in Issue Order', [
+                'order_id' => $orderId,
+                'error' => $e->getMessage(),
+                'sql' => $e->getSql() ?? 'N/A',
+                'bindings' => $e->getBindings() ?? []
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Database error: ' . $e->getMessage()
+            ]);
+            
+        } catch (\Exception $e) {
+            Log::error('Issue Order Error', [
+                'order_id' => $orderId,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while issuing the books: ' . $e->getMessage()
             ]);
         }
     }
@@ -140,10 +245,10 @@ class BorrowRequestController extends Controller
         try {
             $order = Order::findOrFail($orderId);
             
-            if ($order->status !== 'approved') {
+            if ($order->status !== 'issued') {
                 return response()->json([
                     'success' => false, 
-                    'message' => 'Only approved orders can be marked as returned.'
+                    'message' => 'Only issued orders can be marked as returned.'
                 ]);
             }
 

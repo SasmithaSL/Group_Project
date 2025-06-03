@@ -1,7 +1,5 @@
 <?php
-// Create this migration file: database/migrations/xxxx_xx_xx_xxxxxx_fix_orders_table_status.php
-// Run: php artisan make:migration fix_orders_table_status
-
+// database\migrations\2025_06_03_add_issued_status_to_orders.php
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,29 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            // Change status column to handle all required values
-            $table->enum('status', ['pending', 'approved', 'rejected', 'returned', 'cancelled'])
+            // Update status column to include 'issued' status
+            $table->enum('status', ['pending', 'approved', 'issued', 'returned', 'rejected', 'cancelled'])
                   ->default('pending')
                   ->change();
             
-            // Ensure notes column exists and can handle longer text
-            if (!Schema::hasColumn('orders', 'notes')) {
-                $table->text('notes')->nullable();
-            } else {
-                $table->text('notes')->nullable()->change();
-            }
-            
-            // Ensure other required columns exist
-            if (!Schema::hasColumn('orders', 'borrowed_at')) {
-                $table->timestamp('borrowed_at')->nullable();
-            }
-            
-            if (!Schema::hasColumn('orders', 'due_at')) {
-                $table->timestamp('due_at')->nullable();
-            }
-            
-            if (!Schema::hasColumn('orders', 'returned_at')) {
-                $table->timestamp('returned_at')->nullable();
+            // Add issued_at timestamp for tracking when books were issued
+            if (!Schema::hasColumn('orders', 'issued_at')) {
+                $table->timestamp('issued_at')->nullable();
             }
         });
     }
@@ -51,8 +34,13 @@ return new class extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            // Revert back to original status enum if needed
-            $table->enum('status', ['pending', 'approved', 'returned', 'cancelled'])
+            // Remove issued_at column
+            if (Schema::hasColumn('orders', 'issued_at')) {
+                $table->dropColumn('issued_at');
+            }
+            
+            // Revert status enum to previous values
+            $table->enum('status', ['pending', 'approved', 'returned', 'rejected', 'cancelled'])
                   ->default('pending')
                   ->change();
         });

@@ -17,5 +17,4 @@ class Event extends Model
         'image'
     ];
     
-    // You can add relationships or other methods here
 }
