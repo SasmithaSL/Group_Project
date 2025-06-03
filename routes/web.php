@@ -1,4 +1,5 @@
 <?php 
+// routes\web.php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\AuthController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\User\EventController as UserEventController;
 use App\Http\Controllers\User\CartController as UserCartController;
 use App\Http\Controllers\User\OrderController as OrderController;
+use App\Http\Controllers\Admin\BorrowRequestController; // Add this import
 
  
 // User Routes
@@ -54,9 +56,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/books', [AdminBookController::class, 'index'])->name('books.index');
         Route::post('/books', [AdminBookController::class, 'store'])->name('books.store');
         Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
-        Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update'); // Fixed: moved inside admin group
+        Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
         Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store');
-        Route::get('/borrow-requests', function () { return view('admin.borrow-requests'); })->name('borrow-requests');
+        
+        // Borrow Requests Routes
+        Route::get('/borrow-requests', [BorrowRequestController::class, 'index'])->name('borrow-requests');
+        Route::post('/orders/{id}/accept', [BorrowRequestController::class, 'acceptOrder'])->name('orders.accept');
+        Route::post('/orders/{id}/reject', [BorrowRequestController::class, 'rejectOrder'])->name('orders.reject');
+        Route::post('/orders/{id}/returned', [BorrowRequestController::class, 'markAsReturned'])->name('orders.returned');
+        
         Route::get('/announcements', [AdminEventController::class, 'index'])->name('announcements');
         Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
         Route::delete('/events/{id}', [AdminEventController::class, 'destroy'])->name('events.destroy');
@@ -64,8 +72,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
         Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
         Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
-
-       
-
     });
 });
