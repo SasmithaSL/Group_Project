@@ -78,25 +78,23 @@
                                     </tbody>
                                 </table>
 
-                                @if (count($cartItems))
-                                    <div class="d-flex justify-content-between align-items-center mt-4" style="margin-bottom: 20px;">
-                                        <div>
-                                            <button type="button" id="selectAllBtn" class="btn btn-outline-primary me-2" style="padding: 8px 16px; height: 38px;">
-                                                <i class="fas fa-check-square me-1"></i> SELECT ALL
-                                            </button>
-                                            <button type="button" id="deselectAllBtn" class="btn btn-outline-secondary" style="padding: 8px 16px; height: 38px;">
-                                                <i class="fas fa-square me-1"></i> DESELECT ALL
-                                            </button>
-                                            <button type="button" id="checkoutBtn" class="read-more-btn">
-                                                <i class="fas fa-shopping-cart me-2"></i> REQUEST BOOKS
-                                            </button>
-                                        </div>
-                                       
-                                    </div>
-                                @endif
+                               
 
                             </form>
+ @if (count($cartItems))
+                                   <div class="d-flex justify-content-end align-items-center mt-4" style="margin-bottom: 20px;">
+                                        <button type="button" id="selectAllBtn" class="btn btn-outline-primary me-2" style="padding: 8px 16px; height: 38px;">
+                                            <i class="fas fa-check-square me-1"></i> SELECT ALL
+                                        </button>
+                                        <button type="button" id="deselectAllBtn" class="btn btn-outline-secondary me-2" style="padding: 8px 16px; height: 38px;">
+                                            <i class="fas fa-square me-1"></i> DESELECT ALL
+                                        </button>
+                                        <button type="button" id="checkoutBtn" class="read-more-btn">
+                                            <i class="fas fa-shopping-cart me-2"></i> REQUEST BOOKS
+                                        </button>
+                                    </div>
 
+                                @endif
                             {{-- Modal --}}
                             <div id="checkoutModal" class="modal" style="display: none;">
                                 <div class="modal-content"

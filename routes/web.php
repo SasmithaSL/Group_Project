@@ -24,6 +24,8 @@ Route::post('/user-register', [AuthController::class, 'userRegister'])->name('re
 Route::post('/user-logout', [AuthController::class, 'userLogout'])->name('user-logout');
 Route::get('/books', [UserBookController::class, 'index'])->name('books.index');
 Route::get('/news-events', [UserEventController::class, 'index'])->name('news-events');
+Route::get('/events', [UserEventController::class, 'index'])->name('events.index');
+
 
 Route::middleware([CheckUser::class])->group(function () {
     Route::get('/books-media', [UserBookController::class, 'index'])->name('books-media');

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
     
 
 
@@ -40,44 +40,31 @@
             <div class="container">
                 <div class="filter-box">
                     <h3>What are you looking for at the library?</h3>
-                    <form action="http://libraria.demo.presstigers.com/index.html" method="get">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="form-group">
+                    <form method="GET" action="{{ route('books.index') }}">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="form-group">
                                 <label class="sr-only" for="keywords">Search by Keyword</label>
-                                <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
+                                <input class="form-control"
+                                        placeholder="Search by title, author, ISBN, or description"
+                                        id="keywords"
+                                        name="keywords"
+                                        type="text"
+                                        value="{{ request('keywords') }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="form-group">
-                                <select name="catalog" id="catalog" class="form-control">
-                                    <option>Search the Catalog</option>
-                                    <option>Catalog 01</option>
-                                    <option>Catalog 02</option>
-                                    <option>Catalog 03</option>
-                                    <option>Catalog 04</option>
-                                    <option>Catalog 05</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="form-group">
-                                <select name="category" id="category" class="form-control">
-                                    <option>All Categories</option>
-                                    <option>Category 01</option>
-                                    <option>Category 02</option>
-                                    <option>Category 03</option>
-                                    <option>Category 04</option>
-                                    <option>Category 05</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control" type="submit" value="Search">
+                            <div class="col-md-2 col-sm-6">
+                                <div class="form-group d-flex gap-2">
+                                <input class="btn btn-primary" type="submit" value="Search">
+                                @if(request('keywords'))
+                                    <a href="{{ route('books.index') }}" class="btn btn-secondary">Clear</a>
+                                @endif
+                                </div>
                             </div>
                         </div>
                     </form>
-                </div>
+                    </div>
+
             </div>
         </section>
         <!-- End: Search Section -->

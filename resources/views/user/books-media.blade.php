@@ -2,50 +2,6 @@
 <html lang="zxx">
    @include('user.head')
    @include('user.header')
-   
-   <script>
-      <script>
-         $(document).ready(function () {
-             $('#processOrderBtn').click(function (e) {
-                 e.preventDefault();
-         
-                 let selectedBooks = [];
-                 $('input[name="selected_books[]"]:checked').each(function () {
-                     selectedBooks.push($(this).val());
-                 });
-         
-                 $.ajax({
-                     url: '{{ route("cart.process") }}',
-                     method: 'POST',
-                     data: {
-                         _token: '{{ csrf_token() }}',
-                         selected_books: selectedBooks
-                     },
-                     success: function (response) {
-                         if (response.success) {
-                             showPopup('✅ Order placed! Code: ' + response.order_code, 'success');
-                         }
-                     },
-                     error: function () {
-                         showPopup('❌ Failed to process order.', 'error');
-                     }
-                 });
-         
-                 function showPopup(message, type) {
-                     const popup = $('<div class="popup"></div>')
-                         .addClass(type === 'success' ? 'success-popup' : 'error-popup')
-                         .text(message);
-         
-                     $('body').append(popup);
-         
-                     setTimeout(() => {
-                         popup.fadeOut(500, () => popup.remove());
-                     }, 3000); // remove after 3 seconds
-                 }
-             });
-         });
-      </script>
-   </script>
    <body>
       <!-- Start: Page Banner -->
       <section class="page-banner services-banner">
@@ -69,164 +25,140 @@
                            <div class="container">
                               <div class="filter-box">
                                  <h3>What are you looking for at the library?</h3>
-                                    <div class="col-md-4 col-sm-6">
-                                       <div class="form-group">
-                                          <label class="sr-only" for="keywords">Search by Keyword</label>
-                                          <input class="form-control" placeholder="Search by Keyword"
-                                             id="keywords" name="keywords" type="text">
+                                 <form method="GET" action="{{ route('books.index') }}">
+                                    <div class="row">
+                                       <div class="col-md-4 col-sm-6">
+                                          <div class="form-group">
+                                             <label class="sr-only" for="keywords">Search by Keyword</label>
+                                             <input class="form-control"
+                                                   placeholder="Search by title, author, ISBN, or description"
+                                                   id="keywords"
+                                                   name="keywords"
+                                                   type="text"
+                                                   value="{{ request('keywords') }}">
+                                          </div>
                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                       <div class="form-group">
-                                          <select name="catalog" id="catalog" class="form-control">
-                                             <option>Search the Catalog</option>
-                                             <option>Catalog 01</option>
-                                             <option>Catalog 02</option>
-                                             <option>Catalog 03</option>
-                                             <option>Catalog 04</option>
-                                             <option>Catalog 05</option>
-                                          </select>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6">
-                                       <div class="form-group">
-                                          <select name="category" id="category" class="form-control">
-                                             <option>All Categories</option>
-                                             <option>Category 01</option>
-                                             <option>Category 02</option>
-                                             <option>Category 03</option>
-                                             <option>Category 04</option>
-                                             <option>Category 05</option>
-                                          </select>
-                                       </div>
-                                    </div>
-                                    <div class="col-md-2 col-sm-6">
-                                       <div class="form-group">
-                                          <input class="form-control" type="submit" value="Search">
+                                       <div class="col-md-2 col-sm-6">
+                                          <div class="form-group d-flex gap-2">
+                                             <input class="btn btn-primary" type="submit" value="Search">
+                                             @if(request('keywords'))
+                                                <a href="{{ route('books.index') }}" class="btn btn-secondary">Clear</a>
+                                             @endif
+                                          </div>
                                        </div>
                                     </div>
                                  </form>
                               </div>
+
                            </div>
                         </section>
                         <!-- End: Search Section -->
                      </div>
-                     <div class="row">
-                        <div class="col-md-9 col-md-push-3">
-                           <div class="filter-options margin-list">
-                              <div class="row">
-                                 <div class="col-md-4 col-sm-4">
-                                    <select name="orderby">
-                                       <option selected="selected">Default sorting</option>
-                                       <option>Sort by popularity</option>
-                                       <option>Sort by rating</option>
-                                       <option>Sort by newness</option>
-                                       <option>Sort by price</option>
-                                    </select>
-                                 </div>
-                                 <div class="col-md-4 col-sm-4">
-                                    <div class="filter-result">Showing items 1 to 9 of 19 total</div>
-                                 </div>
-                              </div>
-                           </div>
-                           @if(session('success'))
-                           <div id="success-popup" class="alert alert-success">
-                              {{ session('success') }}
-                           </div>
-                           @endif
-                           <div class="books-gird">
-                              <ul>
-                                 @foreach($books as $book)
-                                 <li>
-                                    <figure>
-                                       <img src="data:image/jpeg;base64,{{ $book->image }}"
-                                          alt="{{ $book->title }}" />
-                                       <figcaption>
-                                          <p><strong>{{ $book->title }}</strong></p>
-                                          <p><strong>Author:</strong> {{ $book->author }}</p>
-                                       </figcaption>
-                                    </figure>
-                                    <div class="single-book-box">
-                                       <div class="post-detail">
-                                          <div class="books-social-sharing">
-                                          </div>
-                                          <div class="optional-links">
-                                          </div>
-                                          <header class="entry-header">
-                                             <h3 class="entry-title"><a href="#">{{ $book->title }}</a></h3>
-                                             <ul>
-                                                <li><strong>Author:</strong> {{ $book->author }}</li>
-                                                <li><strong>ISBN:</strong> {{ $book->isbn }}</li>
-                                             </ul>
-                                          </header>
-                                          <div class="entry-content">
-                                             <p>{{ Str::limit($book->description, 100) }}</p>
-                                          </div>
-                                          <footer class="entry-footer">
-                                             <a class="btn btn-primary" href="{{ route('cart.add', $book->id) }}">Add to cart</a>
-                                          </footer>
-                                       </div>
-                                    </div>
-                                 </li>
-                                 @endforeach
-                              </ul>
-                           </div>
-                           <!-- Custom Pagination -->
-                           <nav class="navigation pagination text-center">
-                              <h2 class="screen-reader-text">Posts navigation</h2>
-                              <div class="nav-links">
-                                 {{-- Previous Link --}}
-                                 @if($books->onFirstPage())
-                                 <span class="prev page-numbers disabled"><i class="fa fa-long-arrow-left"></i>
-                                 Previous</span>
-                                 @else
-                                 <a class="prev page-numbers" href="{{ $books->previousPageUrl() }}"><i
-                                    class="fa fa-long-arrow-left"></i> Previous</a>
-                                 @endif
-                                 {{-- Page Links --}}
-                                 @foreach($books->getUrlRange(1, $books->lastPage()) as $page => $url)
-                                 @if ($page == $books->currentPage())
-                                 <span class="page-numbers current">{{ $page }}</span>
-                                 @else
-                                 <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
-                                 @endif
-                                 @endforeach
-                                 {{-- Next Link --}}
-                                 @if($books->hasMorePages())
-                                 <a class="next page-numbers" href="{{ $books->nextPageUrl() }}">Next <i
-                                    class="fa fa-long-arrow-right"></i></a>
-                                 @else
-                                 <span class="next page-numbers disabled">Next <i
-                                    class="fa fa-long-arrow-right"></i></span>
-                                 @endif
-                              </div>
-                           </nav>
-                        </div>
-                        <div class="col-md-3 col-md-pull-9">
-                           <aside id="secondary" class="sidebar widget-area" data-accordion-group>
-                              <!-- <div class="widget widget_recent_releases">
-                                 <h4 class="widget-title">Narrow your search</h4>
-                                 <ul>
-                                    <li><a href="#">Books</a></li>
-                                    <li><a href="#">Magazines</a></li>
-                                    <li><a href="#">Kids & Teens</a></li>
-                                    <li><a href="#">Adults</a></li>
-                                    <!-- <li><a href="#">Audio</a></li>
-                                       <li><a href="#">eAudio</a></li> -->
-                                 </ul>
-                                 <div class="clearfix"></div>
-                              <!-- </div> --> 
-                              <div class="clearfix"></div>
-                        </div>
-                        </aside>
+        
+<div class="row">
+   <div class="col-md-9 col-md-push-3">
+      @if(session('success'))
+      <div id="success-popup" class="alert alert-success">
+         {{ session('success') }}
+      </div>
+      @endif
+      
+  
+      
+
+      
+      <div class="books-gird">
+         @if($books->count() > 0)
+         <ul>
+            @foreach($books as $book)
+            <li>
+               <figure>
+                  <img src="data:image/jpeg;base64,{{ $book->image }}"
+                     alt="{{ $book->title }}" />
+                  <figcaption>
+                     <p><strong>{{ $book->title }}</strong></p>
+                     <p><strong>Author:</strong> {{ $book->author }}</p>
+                  </figcaption>
+               </figure>
+               <div class="single-book-box">
+                  <div class="post-detail">
+                     <div class="books-social-sharing">
                      </div>
+                     <div class="optional-links">
+                     </div>
+                     <header class="entry-header">
+                        <h3 class="entry-title"><a href="#">{{ $book->title }}</a></h3>
+                        <ul>
+                           <li><strong>Author:</strong> {{ $book->author }}</li>
+                           <li><strong>ISBN:</strong> {{ $book->isbn }}</li>
+                        </ul>
+                     </header>
+                     <div class="entry-content">
+                        <p>{{ Str::limit($book->description, 100) }}</p>
+                     </div>
+                     <footer class="entry-footer">
+                        <a class="btn btn-primary" href="{{ route('cart.add', $book->id) }}">Add to cart</a>
+                     </footer>
+                  </div>
+               </div>
+            </li>
+            @endforeach
+         </ul>
+         @else
+         <div class="no-results" style="text-align: center; padding: 40px;">
+            <h4>No books found</h4>
+            @if(request('keywords'))
+            <p>No books match your search criteria for "{{ request('keywords') }}"</p>
+            <a href="{{ route('books.index') }}" class="btn btn-primary">View All Books</a>
+            @else
+            <p>No books are currently available.</p>
+            @endif
+         </div>
+         @endif
+      </div>
+      
+      @if($books->hasPages())
+      <!-- Custom Pagination -->
+      <nav class="navigation pagination text-center">
+         <h2 class="screen-reader-text">Posts navigation</h2>
+            <div class="nav-links" style="margin-bottom: 35px;">
+            {{-- Previous Link --}}
+            @if($books->onFirstPage())
+            <span class="prev page-numbers disabled"><i class="fa fa-long-arrow-left"></i>
+            Previous</span>
+            @else
+            <a class="prev page-numbers" href="{{ $books->previousPageUrl() }}"><i
+               class="fa fa-long-arrow-left"></i> Previous</a>
+            @endif
+            {{-- Page Links --}}
+            @foreach($books->getUrlRange(1, $books->lastPage()) as $page => $url)
+            @if ($page == $books->currentPage())
+            <span class="page-numbers current">{{ $page }}</span>
+            @else
+            <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
+            @endif
+            @endforeach
+            {{-- Next Link --}}
+            @if($books->hasMorePages())
+            <a class="next page-numbers" href="{{ $books->nextPageUrl() }}">Next <i
+               class="fa fa-long-arrow-right"></i></a>
+            @else
+            <span class="next page-numbers disabled">Next <i
+               class="fa fa-long-arrow-right"></i></span>
+            @endif
+         </div>
+      </nav>
+      @endif
+   </div>
+ 
+   </aside>
+</div>
                   </div>
                </div>
          </div>
          </main>
       </div>
       </div>
-     
       @include('user.footer')
    </body>
 </html>
