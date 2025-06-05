@@ -30,6 +30,26 @@
                               + Add Event
                               </button>
                            </div>
+                           <!-- Search Section -->
+                           <div class="row mb-3">
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label for="eventSearch">Search Events:</label>
+                                    <div class="input-group">
+                                       <input type="text" class="form-control" id="eventSearch" 
+                                          placeholder="Search by topic, venue, or date..." autocomplete="off">
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div>
+                                       <small class="text-muted" id="searchResults"></small>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                            <div class="table-responsive">
                               <table class="table table-bordered">
                                  <thead>
@@ -44,9 +64,13 @@
                                        <th>Action</th>
                                     </tr>
                                  </thead>
-                                 <tbody>
+                                 <tbody id="eventsTableBody">
                                     @forelse($events as $index => $event)
-                                    <tr>
+                                    <tr class="event-row" 
+                                       data-topic="{{ strtolower($event->topic) }}" 
+                                       data-venue="{{ strtolower($event->venue) }}" 
+                                       data-date="{{ $event->event_date }}"
+                                       data-description="{{ strtolower($event->description) }}">
                                        <td>{{ $index + 1 }}</td>
                                        <td>{{ $event->topic }}</td>
                                        <td>{{ $event->event_date }}</td>
@@ -66,16 +90,15 @@
                                           <form action="{{ route('admin.events.destroy', $event->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this event?');">
                                              @csrf
                                              @method('DELETE')
-                                              <button type="button"
-                                             class="btn btn-info btn-sm" onclick='editEvent(@json($event))'> Update 
-                                          </button>
+                                             <button type="button"
+                                                class="btn btn-info btn-sm" onclick='editEvent(@json($event))'> Update 
+                                             </button>
                                              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                           </form>
-                                         
                                        </td>
                                     </tr>
                                     @empty
-                                    <tr>
+                                    <tr id="no-events-row">
                                        <td colspan="8" class="text-center">No events found.</td>
                                     </tr>
                                     @endforelse
@@ -84,6 +107,69 @@
                            </div>
                         </div>
                      </div>
+                     <script>
+                        $(document).ready(function () {
+                           let allEventRows = $('.event-row');
+                        
+                           // Search functionality
+                           $('#eventSearch').on('input', function() {
+                              const searchTerm = $(this).val().toLowerCase().trim();
+                              
+                              if (searchTerm === '') {
+                                 // Show all rows
+                                 allEventRows.show();
+                                 updateSearchResults('');
+                              } else {
+                                 let visibleCount = 0;
+                                 
+                                 allEventRows.each(function() {
+                                    const topic = $(this).data('topic');
+                                    const venue = $(this).data('venue');
+                                    const date = $(this).data('date');
+                                    const description = $(this).data('description');
+                                    
+                                    if (topic.includes(searchTerm) || 
+                                        venue.includes(searchTerm) || 
+                                        date.includes(searchTerm) || 
+                                        description.includes(searchTerm)) {
+                                       $(this).show();
+                                       visibleCount++;
+                                    } else {
+                                       $(this).hide();
+                                    }
+                                 });
+                                 
+                                 updateSearchResults(searchTerm, visibleCount);
+                              }
+                           });
+                           
+                           // Update search results text
+                           function updateSearchResults(searchTerm, visibleCount = null) {
+                              const resultsElement = $('#searchResults');
+                              
+                              if (searchTerm === '') {
+                                 resultsElement.text('');
+                              } else {
+                                 const totalCount = allEventRows.length;
+                                 if (visibleCount === 0) {
+                                    resultsElement.html('<i class="fas fa-exclamation-triangle text-warning"></i> No events found matching "' + searchTerm + '"');
+                                 } else {
+                                    resultsElement.html('<i class="fas fa-search text-info"></i> Found ' + visibleCount + ' of ' + totalCount + ' events');
+                                 }
+                              }
+                           }
+                        });
+                     </script>
+                     <style>
+                        /* Search input styling */
+                        #eventSearch {
+                        border-radius: 4px;
+                        }
+                        /* Highlight matching rows */
+                        .event-row {
+                        transition: background-color 0.2s ease;
+                        }
+                     </style>
                   </div>
                   <!-- Add/Update Event Modal -->
                   <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">

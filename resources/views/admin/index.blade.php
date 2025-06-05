@@ -189,7 +189,6 @@
                         </div>
                      </div>
                   </div>
-
                   <!-- Overdue Books Table -->
                   @if($overdueBooks->count() > 0)
                   <div class="row">

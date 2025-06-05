@@ -63,6 +63,26 @@
                                  </button>
                               </div>
                               @endif
+                              <!-- Search Section -->
+                              <div class="row mb-3">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="bookSearch">Search Books:</label>
+                                       <div class="input-group">
+                                          <input type="text" class="form-control" id="bookSearch" 
+                                             placeholder="Search by title, author, or ISBN..." autocomplete="off">
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>&nbsp;</label>
+                                       <div>
+                                          <small class="text-muted" id="searchResults"></small>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                               @if(isset($books) && $books->count() > 0)
                               <div class="table-responsive">
                                  <table class="table table-bordered">
@@ -79,9 +99,9 @@
                                           <th>Action</th>
                                        </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="booksTableBody">
                                        @foreach($books as $index => $book)
-                                       <tr>
+                                       <tr class="book-row" data-title="{{ strtolower($book->title) }}" data-author="{{ strtolower($book->author) }}" data-isbn="{{ strtolower($book->isbn) }}">
                                           <td>{{ $index + 1 }}</td>
                                           <td>{{ $book->id }}</td>
                                           <td>{{ $book->title }}</td>
@@ -122,6 +142,65 @@
                               @endif
                            </div>
                         </div>
+                        <script>
+                           $(document).ready(function () {
+                              let allBookRows = $('.book-row');
+                           
+                              // Search functionality
+                              $('#bookSearch').on('input', function() {
+                                 const searchTerm = $(this).val().toLowerCase().trim();
+                                 
+                                 if (searchTerm === '') {
+                                    // Show all rows
+                                    allBookRows.show();
+                                    updateSearchResults('');
+                                 } else {
+                                    let visibleCount = 0;
+                                    
+                                    allBookRows.each(function() {
+                                       const title = $(this).data('title');
+                                       const author = $(this).data('author');
+                                       const isbn = $(this).data('isbn');
+                                       
+                                       if (title.includes(searchTerm) || author.includes(searchTerm) || isbn.includes(searchTerm)) {
+                                          $(this).show();
+                                          visibleCount++;
+                                       } else {
+                                          $(this).hide();
+                                       }
+                                    });
+                                    
+                                    updateSearchResults(searchTerm, visibleCount);
+                                 }
+                              });
+                              
+                              // Update search results text
+                              function updateSearchResults(searchTerm, visibleCount = null) {
+                                 const resultsElement = $('#searchResults');
+                                 
+                                 if (searchTerm === '') {
+                                    resultsElement.text('');
+                                 } else {
+                                    const totalCount = allBookRows.length;
+                                    if (visibleCount === 0) {
+                                       resultsElement.html('<i class="fas fa-exclamation-triangle text-warning"></i> No books found matching "' + searchTerm + '"');
+                                    } else {
+                                       resultsElement.html('<i class="fas fa-search text-info"></i> Found ' + visibleCount + ' of ' + totalCount + ' books');
+                                    }
+                                 }
+                              }
+                           });
+                        </script>
+                        <style>
+                           /* Search input styling */
+                           #bookSearch {
+                           border-radius: 4px;
+                           }
+                           /* Highlight matching rows */
+                           .book-row {
+                           transition: background-color 0.2s ease;
+                           }
+                        </style>
                      </div>
                      {{-- Add Book Modal --}}
                      <div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel" aria-hidden="true">
@@ -231,7 +310,6 @@
                   </div>
                </div>
                <footer class="footer">
-                 
                </footer>
             </div>
          </div>
@@ -248,6 +326,5 @@
       <script src="../../../admin/assets/js/file-upload.js"></script>
       <script src="../../../admin/assets/js/typeahead.js"></script>
       <script src="../../../admin/assets/js/select2.js"></script>
-      
    </body>
 </html>

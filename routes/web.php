@@ -74,8 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
         Route::get('/index', [DashboardController::class, 'index'])->name('index');
         Route::post('/index/mark-returned/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'markAsReturned'])->name('admin.index.mark-returned');
-    
-
     });
 });
 

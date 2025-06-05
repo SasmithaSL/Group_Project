@@ -36,7 +36,6 @@
                                        <div class="input-group">
                                           <input type="text" class="form-control" id="orderSearch" 
                                              placeholder="Enter order number..." autocomplete="off">
-                                          
                                        </div>
                                     </div>
                                  </div>

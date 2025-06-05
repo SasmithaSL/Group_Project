@@ -12,7 +12,6 @@
             </div>
          </div>
       </section>
-
       <div id="content" class="site-content">
       <div id="primary" class="content-area">
       <main id="main" class="site-main">
@@ -20,34 +19,56 @@
             <div class="container">
                <!-- Start: Search Section -->
                <section class="search-filters">
-                  <div class="filter-box">
-                     <h3>Find the library events</h3>
-                     <form method="GET" action="{{ route('events.index') }}">
-                        <div class="row">
-                           <div class="col-md-4 col-sm-6">
-                              <div class="form-group">
-                                 <label class="sr-only" for="keywords">Search by Keyword</label>
-                                 <input class="form-control"
-                                    placeholder="Search by topic, description, or venue"
-                                    id="keywords"
-                                    name="keywords"
-                                    type="text"
-                                    value="{{ request('keywords') }}">
-                              </div>
-                           </div>
-                           <div class="col-md-2 col-sm-6">
-                              <div class="form-group d-flex gap-2">
-                                 <input class="btn btn-primary" type="submit" value="Search">
-                                 @if(request('keywords'))
-                                 <a href="{{ route('events.index') }}" class="btn btn-secondary">Clear</a>
-                                 @endif
-                              </div>
-                           </div>
-                        </div>
-                     </form>
+                  <div class="container">
+                     <div class="filter-box">
+                        <h3 style="text-align: center !important;">Find the library events</h3>
+                        <form method="GET" action="{{ route('events.index') }}" style="display: flex !important; justify-content: center !important; align-items: center !important; gap: 10px !important;">
+                           <input class="form-control"
+                              placeholder="Search by topic, description, or venue"
+                              id="keywords"
+                              name="keywords"
+                              type="text"
+                              value="{{ request('keywords') }}"
+                              style="width: 400px !important; display: inline-block !important;">
+                           <input class="btn btn-primary" type="submit" value="Search" style="display: inline-block !important;">
+                           @if(request('keywords'))
+                           <a href="{{ route('events.index') }}" class="btn btn-secondary" style="display: inline-block !important;">Clear</a>
+                           @endif
+                        </form>
+                     </div>
                   </div>
                   <div class="clear"></div>
                </section>
+               <style>
+                  .search-filters {
+                  text-align: center !important;
+                  }
+                  .search-filters .container {
+                  display: flex !important;
+                  justify-content: center !important;
+                  }
+                  .filter-box {
+                  width: 100% !important;
+                  max-width: 800px !important;
+                  }
+                  .filter-box form {
+                  display: flex !important;
+                  justify-content: center !important;
+                  align-items: center !important;
+                  gap: 10px !important;
+                  flex-wrap: wrap !important;
+                  }
+                  @media (max-width: 768px) {
+                  .filter-box form {
+                  flex-direction: column !important;
+                  gap: 15px !important;
+                  }
+                  .form-control {
+                  width: 100% !important;
+                  max-width: 300px !important;
+                  }
+                  }
+               </style>
                <!-- End: Search Section -->
                <div class="row">
                   <div class="col-md-9 col-md-push-3 news-events-list-view">
@@ -128,44 +149,41 @@
                               @endif
                            </div>
                            @endforeach
-                          @if($events->hasPages())
-                              <nav class="navigation pagination text-center">
-                                 <h2 class="screen-reader-text">Posts navigation</h2>
-                                 <div class="nav-links" style="margin-bottom: 35px;">
-                                    {{-- Previous Page Link --}}
-                                    @if($events->onFirstPage())
-                                       <span class="prev page-numbers disabled">
-                                          <i class="fa fa-long-arrow-left"></i> Previous
-                                       </span>
-                                    @else
-                                       <a class="prev page-numbers" href="{{ $events->previousPageUrl() }}">
-                                          <i class="fa fa-long-arrow-left"></i> Previous
-                                       </a>
-                                    @endif
-
-                                    {{-- Page Numbers --}}
-                                    @foreach($events->getUrlRange(1, $events->lastPage()) as $page => $url)
-                                       @if ($page == $events->currentPage())
-                                          <span class="page-numbers current">{{ $page }}</span>
-                                       @else
-                                          <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
-                                       @endif
-                                    @endforeach
-
-                                    {{-- Next Page Link --}}
-                                    @if($events->hasMorePages())
-                                       <a class="next page-numbers" href="{{ $events->nextPageUrl() }}">
-                                          Next <i class="fa fa-long-arrow-right"></i>
-                                       </a>
-                                    @else
-                                       <span class="next page-numbers disabled">
-                                          Next <i class="fa fa-long-arrow-right"></i>
-                                       </span>
-                                    @endif
-                                 </div>
-                              </nav>
-                              @endif
-
+                           @if($events->hasPages())
+                           <nav class="navigation pagination text-center">
+                              <h2 class="screen-reader-text">Posts navigation</h2>
+                              <div class="nav-links" style="margin-bottom: 35px;">
+                                 {{-- Previous Page Link --}}
+                                 @if($events->onFirstPage())
+                                 <span class="prev page-numbers disabled">
+                                 <i class="fa fa-long-arrow-left"></i> Previous
+                                 </span>
+                                 @else
+                                 <a class="prev page-numbers" href="{{ $events->previousPageUrl() }}">
+                                 <i class="fa fa-long-arrow-left"></i> Previous
+                                 </a>
+                                 @endif
+                                 {{-- Page Numbers --}}
+                                 @foreach($events->getUrlRange(1, $events->lastPage()) as $page => $url)
+                                 @if ($page == $events->currentPage())
+                                 <span class="page-numbers current">{{ $page }}</span>
+                                 @else
+                                 <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
+                                 @endif
+                                 @endforeach
+                                 {{-- Next Page Link --}}
+                                 @if($events->hasMorePages())
+                                 <a class="next page-numbers" href="{{ $events->nextPageUrl() }}">
+                                 Next <i class="fa fa-long-arrow-right"></i>
+                                 </a>
+                                 @else
+                                 <span class="next page-numbers disabled">
+                                 Next <i class="fa fa-long-arrow-right"></i>
+                                 </span>
+                                 @endif
+                              </div>
+                           </nav>
+                           @endif
                         </div>
                      </div>
                   </div>
