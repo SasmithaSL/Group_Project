@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\User\EventController as UserEventController;
 use App\Http\Controllers\User\CartController as UserCartController;
 use App\Http\Controllers\User\OrderController as OrderController;
+use App\Http\Controllers\Admin\BorrowRequestController; 
+use App\Http\Controllers\Admin\DashboardController;
 
  
 // User Routes
@@ -23,6 +25,8 @@ Route::post('/user-register', [AuthController::class, 'userRegister'])->name('re
 Route::post('/user-logout', [AuthController::class, 'userLogout'])->name('user-logout');
 Route::get('/books', [UserBookController::class, 'index'])->name('books.index');
 Route::get('/news-events', [UserEventController::class, 'index'])->name('news-events');
+Route::get('/events', [UserEventController::class, 'index'])->name('events.index');
+
 
 Route::middleware([CheckUser::class])->group(function () {
     Route::get('/books-media', [UserBookController::class, 'index'])->name('books-media');
@@ -54,9 +58,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/books', [AdminBookController::class, 'index'])->name('books.index');
         Route::post('/books', [AdminBookController::class, 'store'])->name('books.store');
         Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
-        Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update'); // Fixed: moved inside admin group
-        Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store');
-        Route::get('/borrow-requests', function () { return view('admin.borrow-requests'); })->name('borrow-requests');
+        Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
+        Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store.alt');
+        Route::get('/borrow-requests', [BorrowRequestController::class, 'index'])->name('borrow-requests');
+        Route::post('/orders/{id}/accept', [BorrowRequestController::class, 'acceptOrder'])->name('orders.accept');
+        Route::post('/orders/{id}/reject', [BorrowRequestController::class, 'rejectOrder'])->name('orders.reject');
+        Route::post('/orders/{id}/returned', [BorrowRequestController::class, 'markAsReturned'])->name('orders.returned');
+        Route::post('/orders/{id}/issue', [BorrowRequestController::class, 'issueOrder'])->name('orders.issue');
         Route::get('/announcements', [AdminEventController::class, 'index'])->name('announcements');
         Route::post('/events', [AdminEventController::class, 'store'])->name('events.store');
         Route::delete('/events/{id}', [AdminEventController::class, 'destroy'])->name('events.destroy');
@@ -64,8 +72,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
         Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
         Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
-
-       
-
+        Route::get('/index', [DashboardController::class, 'index'])->name('index');
+        Route::post('/index/mark-returned/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'markAsReturned'])->name('admin.index.mark-returned');
     });
 });
+

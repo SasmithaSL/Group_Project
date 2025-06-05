@@ -32,9 +32,14 @@ class Order extends Model
     protected static function booted()
     {
         static::creating(function ($order) {
-            $order->order_code = (string) Str::uuid();
+            do {
+                $code = 'BR-' . random_int(10000, 99999);
+            } while (self::where('order_code', $code)->exists());
+
+            $order->order_code = $code;
         });
     }
+
 
     // Relationship: Order belongs to a user
     public function user()

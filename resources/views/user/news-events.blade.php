@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
    <head>        
       @include('user.head')
       @include('user.header')
    <body>
-      <!-- Start: Page Banner -->
       <section class="page-banner news-listing-banner services-banner">
          <div class="container">
             <div class="banner-header">
                <h2>News Listing and Events</h2>
                <span class="underline center"></span>
-               <!-- <p class="lead">Proin ac eros pellentesque dolor pharetra tempo.</p> -->
             </div>
          </div>
       </section>
-      <!-- End: Page Banner -->
-      <!-- Start: Products Section -->
       <div id="content" class="site-content">
       <div id="primary" class="content-area">
       <main id="main" class="site-main">
@@ -23,72 +19,58 @@
             <div class="container">
                <!-- Start: Search Section -->
                <section class="search-filters">
-                  <div class="filter-box">
-                     <h3>Find the library events  </h3>
-                     <form action="http://libraria.demo.presstigers.com/news-events-detail.html" method="get">
-                        <div class="col-md-10">
-                           <div class="row">
-                              <div class="col-md-4 col-sm-6">
-                                 <div class="form-group">
-                                    <label class="sr-only" for="keywords">Search by Keyword</label>
-                                    <input class="form-control" placeholder="Search by Keyword" id="keywords" name="keywords" type="text">
-                                 </div>
-                              </div>
-                              <div class="col-md-4 col-sm-3">
-                                 <div class="form-group">
-                                    <select name="category" id="category" class="form-control">
-                                       <option>All Categories</option>
-                                       <option>Category 01</option>
-                                       <option>Category 02</option>
-                                       <option>Category 03</option>
-                                       <option>Category 04</option>
-                                       <option>Category 05</option>
-                                    </select>
-                                 </div>
-                              </div>
-                              <div class="col-md-4 col-sm-3">
-                                 <div class="form-group">
-                                    <select name="locations" id="locations" class="form-control">
-                                       <option>All Locations</option>
-                                       <option>Location 01</option>
-                                       <option>Location 02</option>
-                                       <option>Location 03</option>
-                                       <option>Location 04</option>
-                                       <option>Location 05</option>
-                                    </select>
-                                 </div>
-                              </div>
-                              
-                              <div class="col-md-4 col-sm-3">
-                                
-                              </div>
-                             
-                           </div>
-                        </div>
-                         
-                        <div class="col-md-2">
-                           <div class="row">
-                              <div class="col-md-12 col-sm-6">
-                               
-                              </div>
-                              <div class="col-md-12 col-sm-6">
-                                 <div class="form-group">
-                                    <input class="form-control" type="submit" value="Find Event">
-                                    
-                                 </div>
-                                 
-                              </div>
-                           </div>
-                        </div>
-                     </form>
-                     
+                  <div class="container">
+                     <div class="filter-box">
+                        <h3 style="text-align: center !important;">Find the library events</h3>
+                        <form method="GET" action="{{ route('events.index') }}" style="display: flex !important; justify-content: center !important; align-items: center !important; gap: 10px !important;">
+                           <input class="form-control"
+                              placeholder="Search by topic, description, or venue"
+                              id="keywords"
+                              name="keywords"
+                              type="text"
+                              value="{{ request('keywords') }}"
+                              style="width: 400px !important; display: inline-block !important;">
+                           <input class="btn btn-primary" type="submit" value="Search" style="display: inline-block !important;">
+                           @if(request('keywords'))
+                           <a href="{{ route('events.index') }}" class="btn btn-secondary" style="display: inline-block !important;">Clear</a>
+                           @endif
+                        </form>
+                     </div>
                   </div>
-                  
                   <div class="clear"></div>
                </section>
+               <style>
+                  .search-filters {
+                  text-align: center !important;
+                  }
+                  .search-filters .container {
+                  display: flex !important;
+                  justify-content: center !important;
+                  }
+                  .filter-box {
+                  width: 100% !important;
+                  max-width: 800px !important;
+                  }
+                  .filter-box form {
+                  display: flex !important;
+                  justify-content: center !important;
+                  align-items: center !important;
+                  gap: 10px !important;
+                  flex-wrap: wrap !important;
+                  }
+                  @media (max-width: 768px) {
+                  .filter-box form {
+                  flex-direction: column !important;
+                  gap: 15px !important;
+                  }
+                  .form-control {
+                  width: 100% !important;
+                  max-width: 300px !important;
+                  }
+                  }
+               </style>
                <!-- End: Search Section -->
                <div class="row">
-                
                   <div class="col-md-9 col-md-push-3 news-events-list-view">
                      <div class="news-list-box">
                         <div class="single-news-list">
@@ -167,18 +149,42 @@
                               @endif
                            </div>
                            @endforeach
+                           @if($events->hasPages())
                            <nav class="navigation pagination text-center">
                               <h2 class="screen-reader-text">Posts navigation</h2>
-                              <div class="nav-links">
-                                 <a class="prev page-numbers" href="#."><i class="fa fa-long-arrow-left"></i> Previous</a>
-                                 <span class="page-numbers current">1</span>
-                                 <a class="page-numbers" href="#.">2</a>
-                                 <a class="page-numbers" href="#.">3</a>
-                                 <a class="next page-numbers" href="#.">Next <i class="fa fa-long-arrow-right"></i></a>
+                              <div class="nav-links" style="margin-bottom: 35px;">
+                                 {{-- Previous Page Link --}}
+                                 @if($events->onFirstPage())
+                                 <span class="prev page-numbers disabled">
+                                 <i class="fa fa-long-arrow-left"></i> Previous
+                                 </span>
+                                 @else
+                                 <a class="prev page-numbers" href="{{ $events->previousPageUrl() }}">
+                                 <i class="fa fa-long-arrow-left"></i> Previous
+                                 </a>
+                                 @endif
+                                 {{-- Page Numbers --}}
+                                 @foreach($events->getUrlRange(1, $events->lastPage()) as $page => $url)
+                                 @if ($page == $events->currentPage())
+                                 <span class="page-numbers current">{{ $page }}</span>
+                                 @else
+                                 <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
+                                 @endif
+                                 @endforeach
+                                 {{-- Next Page Link --}}
+                                 @if($events->hasMorePages())
+                                 <a class="next page-numbers" href="{{ $events->nextPageUrl() }}">
+                                 Next <i class="fa fa-long-arrow-right"></i>
+                                 </a>
+                                 @else
+                                 <span class="next page-numbers disabled">
+                                 Next <i class="fa fa-long-arrow-right"></i>
+                                 </span>
+                                 @endif
                               </div>
                            </nav>
+                           @endif
                         </div>
-                        
                      </div>
                   </div>
                </div>

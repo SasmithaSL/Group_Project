@@ -1,5 +1,5 @@
 <?php
-
+// app\Http\Controllers\User\AuthController.php
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;

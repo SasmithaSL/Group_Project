@@ -1,5 +1,5 @@
 <?php
-
+// app\Http\Controllers\User\OrderController.php
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
@@ -24,23 +24,7 @@ public function viewOrders()
     return view('user.orders', compact('orders'));
 }
 
-public function downloadQr($orderId)
-{
-    $order = Order::findOrFail($orderId);
 
-    $qrData = json_encode([
-        'order_code' => $order->order_code,
-        'book_ids' => $order->book_ids,
-    ]);
-
-    $qrImage = QrCode::format('png')
-        ->size(300)
-        ->generate($qrData);
-
-    return response($qrImage)
-        ->header('Content-Type', 'image/png')
-        ->header('Content-Disposition', 'attachment; filename="order-qr.png"');
-}
 
 public function cancel(Order $order)
 {
