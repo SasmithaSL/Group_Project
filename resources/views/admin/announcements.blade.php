@@ -3,7 +3,6 @@
    @include('admin.head')
    <body>
       <div class="container-scroller">
-      <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
          <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
             <a class="sidebar-brand brand-logo" href="../../index"><img src="../../../admin/assets/images/logo.png" alt="logo" /></a>
@@ -11,15 +10,11 @@
          </div>
          @include('admin.sidebar')
       </nav>
-      <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-         <!-- partial:../../partials/_navbar.html -->
          @include('admin.navbar')
-         <!-- partial -->
          <div class="main-panel">
             <div class="content-wrapper">
                <div class="row">
-                  <!-- Display Events -->
                   <!-- Display Events -->
                   <div class="col-md-12 grid-margin stretch-card">
                      <div class="card">
@@ -87,14 +82,13 @@
                                           @endif
                                        </td>
                                        <td>
-                                          <form action="{{ route('admin.events.destroy', $event->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this event?');">
-                                             @csrf
-                                             @method('DELETE')
-                                             <button type="button"
-                                                class="btn btn-info btn-sm" onclick='editEvent(@json($event))'> Update 
-                                             </button>
-                                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                          </form>
+                                          <button type="button" class="btn btn-info btn-sm" onclick='editEvent(@json($event))'>
+                                          Update
+                                          </button>
+                                          <button type="button" class="btn btn-danger btn-sm delete-event-btn" 
+                                             data-event-id="{{ $event->id }}" data-event-topic="{{ $event->topic }}">
+                                          Delete
+                                          </button>
                                        </td>
                                     </tr>
                                     @empty
@@ -107,69 +101,6 @@
                            </div>
                         </div>
                      </div>
-                     <script>
-                        $(document).ready(function () {
-                           let allEventRows = $('.event-row');
-                        
-                           // Search functionality
-                           $('#eventSearch').on('input', function() {
-                              const searchTerm = $(this).val().toLowerCase().trim();
-                              
-                              if (searchTerm === '') {
-                                 // Show all rows
-                                 allEventRows.show();
-                                 updateSearchResults('');
-                              } else {
-                                 let visibleCount = 0;
-                                 
-                                 allEventRows.each(function() {
-                                    const topic = $(this).data('topic');
-                                    const venue = $(this).data('venue');
-                                    const date = $(this).data('date');
-                                    const description = $(this).data('description');
-                                    
-                                    if (topic.includes(searchTerm) || 
-                                        venue.includes(searchTerm) || 
-                                        date.includes(searchTerm) || 
-                                        description.includes(searchTerm)) {
-                                       $(this).show();
-                                       visibleCount++;
-                                    } else {
-                                       $(this).hide();
-                                    }
-                                 });
-                                 
-                                 updateSearchResults(searchTerm, visibleCount);
-                              }
-                           });
-                           
-                           // Update search results text
-                           function updateSearchResults(searchTerm, visibleCount = null) {
-                              const resultsElement = $('#searchResults');
-                              
-                              if (searchTerm === '') {
-                                 resultsElement.text('');
-                              } else {
-                                 const totalCount = allEventRows.length;
-                                 if (visibleCount === 0) {
-                                    resultsElement.html('<i class="fas fa-exclamation-triangle text-warning"></i> No events found matching "' + searchTerm + '"');
-                                 } else {
-                                    resultsElement.html('<i class="fas fa-search text-info"></i> Found ' + visibleCount + ' of ' + totalCount + ' events');
-                                 }
-                              }
-                           }
-                        });
-                     </script>
-                     <style>
-                        /* Search input styling */
-                        #eventSearch {
-                        border-radius: 4px;
-                        }
-                        /* Highlight matching rows */
-                        .event-row {
-                        transition: background-color 0.2s ease;
-                        }
-                     </style>
                   </div>
                   <!-- Add/Update Event Modal -->
                   <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
@@ -237,7 +168,6 @@
                         </div>
                      </div>
                   </div>
-                  <!-- JS Script -->
                   <script>
                      function openAddModal() {
                         resetForm();
@@ -272,37 +202,193 @@
                         $('#venue').val(event.venue);
                         $('#addEventModal').modal('show');
                      }
+                      $(document).ready(function () {
+                           let allEventRows = $('.event-row');
+                        
+                           // Show popup messages for session success/error messages
+                           @if (session('success'))
+                              showPopup('✅ {{ session('success') }}', 'success');
+                           @endif
+                           
+                           @if (session('delete'))
+                              showPopup('✅ {{ session('delete') }}', 'success');
+                           @endif
+                           
+                           @if ($errors->any())
+                              @foreach ($errors->all() as $error)
+                                 showPopup('❌ {{ $error }}', 'error');
+                              @endforeach
+                           @endif
+                        
+                           // Search functionality
+                           $('#eventSearch').on('input', function() {
+                              const searchTerm = $(this).val().toLowerCase().trim();
+                              
+                              if (searchTerm === '') {
+                                 // Show all rows
+                                 allEventRows.show();
+                                 updateSearchResults('');
+                              } else {
+                                 let visibleCount = 0;
+                                 
+                                 allEventRows.each(function() {
+                                    const topic = $(this).data('topic');
+                                    const venue = $(this).data('venue');
+                                    const date = $(this).data('date');
+                                    const description = $(this).data('description');
+                                    
+                                    if (topic.includes(searchTerm) || 
+                                        venue.includes(searchTerm) || 
+                                        date.includes(searchTerm) || 
+                                        description.includes(searchTerm)) {
+                                       $(this).show();
+                                       visibleCount++;
+                                    } else {
+                                       $(this).hide();
+                                    }
+                                 });
+                                 
+                                 updateSearchResults(searchTerm, visibleCount);
+                              }
+                           });
+                           
+                           // Update search results text
+                           function updateSearchResults(searchTerm, visibleCount = null) {
+                              const resultsElement = $('#searchResults');
+                              
+                              if (searchTerm === '') {
+                                 resultsElement.text('');
+                              } else {
+                                 const totalCount = allEventRows.length;
+                                 if (visibleCount === 0) {
+                                    resultsElement.html('<i class="fas fa-exclamation-triangle text-warning"></i> No events found matching "' + searchTerm + '"');
+                                 } else {
+                                    resultsElement.html('<i class="fas fa-search text-info"></i> Found ' + visibleCount + ' of ' + totalCount + ' events');
+                                 }
+                              }
+                           }
+                           
+                           // Handle delete event with confirmation
+                           $('.delete-event-btn').click(function(e) {
+                              e.preventDefault();
+                              
+                              const eventId = $(this).data('event-id');
+                              const eventTopic = $(this).data('event-topic');
+                              const button = $(this);
+                              
+                              if (confirm('Are you sure you want to delete "' + eventTopic + '"?')) {
+                                 button.prop('disabled', true);
+                                 button.html('<i class="fas fa-spinner fa-spin"></i> Deleting...');
+                                 
+                                 // Create a form and submit it
+                                 const form = $('<form>', {
+                                    'method': 'POST',
+                                    'action': '/admin/events/' + eventId
+                                 });
+                                 
+                                 form.append($('<input>', {
+                                    'type': 'hidden',
+                                    'name': '_token',
+                                    'value': '{{ csrf_token() }}'
+                                 }));
+                                 
+                                 form.append($('<input>', {
+                                    'type': 'hidden',
+                                    'name': '_method',
+                                    'value': 'DELETE'
+                                 }));
+                                 
+                                 $('body').append(form);
+                                 form.submit();
+                              }
+                           });
+                           
+                           // Show popup function
+                           function showPopup(message, type) {
+                              const popup = $('<div class="popup"></div>')
+                                    .addClass(type === 'success' ? 'success-popup' : 'error-popup')
+                                    .text(message);
+                        
+                              $('body').append(popup);
+                        
+                              setTimeout(() => {
+                                    popup.fadeOut(500, () => popup.remove());
+                              }, 3000);
+                           }
+                           
+                           // Handle event form submission with AJAX
+                           $('#eventForm').on('submit', function(e) {
+                              e.preventDefault();
+                              
+                              const form = $(this);
+                              const submitBtn = $('#submitBtn');
+                              const formData = new FormData(this);
+                              const isUpdate = $('#formMethod').val() === 'PUT';
+                              
+                              submitBtn.prop('disabled', true);
+                              submitBtn.html('<i class="fas fa-spinner fa-spin"></i> ' + (isUpdate ? 'Updating...' : 'Adding...'));
+                              
+                              $.ajax({
+                                 url: form.attr('action'),
+                                 method: 'POST',
+                                 data: formData,
+                                 processData: false,
+                                 contentType: false,
+                                 success: function(response) {
+                                    showPopup('✅ Event ' + (isUpdate ? 'updated' : 'added') + ' successfully!', 'success');
+                                    $('#addEventModal').modal('hide');
+                                    setTimeout(() => {
+                                       location.reload();
+                                    }, 1500);
+                                 },
+                                 error: function(xhr) {
+                                    const errors = xhr.responseJSON?.errors;
+                                    if (errors) {
+                                       Object.values(errors).flat().forEach(error => {
+                                          showPopup('❌ ' + error, 'error');
+                                       });
+                                    } else {
+                                       showPopup('❌ Failed to ' + (isUpdate ? 'update' : 'add') + ' event. Please try again.', 'error');
+                                    }
+                                    
+                                    submitBtn.prop('disabled', false);
+                                    submitBtn.html(isUpdate ? 'Update Event' : 'Add Event');
+                                 }
+                              });
+                           });
+                        });
                   </script>
+                     <style>
+                        .popup {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        padding: 15px 20px;
+                        border-radius: 5px;
+                        color: white;
+                        font-weight: bold;
+                        z-index: 9999;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        }
+                        .success-popup {
+                        background-color: #28a745;
+                        }
+                        .error-popup {
+                        background-color: #dc3545;
+                        }
+                        #eventSearch {
+                        border-radius: 4px;
+                        }
+                        .event-row {
+                        transition: background-color 0.2s ease;
+                        }
+                     </style>
                </div>
-               <!-- content-wrapper ends -->
-               <!-- partial:../../partials/_footer.html -->
                <footer class="footer">
                </footer>
-               <!-- partial -->
             </div>
-            <!-- main-panel ends -->
          </div>
-         <!-- page-body-wrapper ends -->
       </div>
-      <!-- container-scroller -->
-      <!-- plugins:js -->
-      <script src="../../../admin/assets/vendors/js/vendor.bundle.base.js"></script>
-      <!-- endinject -->
-      <!-- Plugin js for this page -->
-      <script src="../../../admin/assets/vendors/select2/select2.min.js"></script>
-      <script src="../../../admin/assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-      <!-- End plugin js for this page -->
-      <!-- inject:js -->
-      <script src="../../../admin/assets/js/off-canvas.js"></script>
-      <script src="../../../admin/assets/js/hoverable-collapse.js"></script>
-      <script src="../../../admin/assets/js/misc.js"></script>
-      <script src="../../../admin/assets/js/settings.js"></script>
-      <script src="../../../admin/assets/js/todolist.js"></script>
-      <!-- endinject -->
-      <!-- Custom js for this page -->
-      <script src="../../../admin/assets/js/file-upload.js"></script>
-      <script src="../../../admin/assets/js/typeahead.js"></script>
-      <script src="../../../admin/assets/js/select2.js"></script>
-      <!-- End custom js for this page -->
+      
    </body>
 </html>

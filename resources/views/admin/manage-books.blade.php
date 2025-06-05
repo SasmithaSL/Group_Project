@@ -23,6 +23,8 @@
             </style>
             <div class="main-panel">
                <div class="content-wrapper">
+                  <!-- resources\views\admin\manage-books.blade.php -->
+                  <!-- resources\views\admin\manage-books.blade.php -->
                   <div class="row">
                      <div class="col-md-12 grid-margin stretch-card">
                         <!-- resources\views\admin\manage-books.blade.php -->
@@ -34,35 +36,6 @@
                                  <i class="fa fa-plus"></i> + Add New Book
                                  </button>
                               </div>
-                              <!-- Success and Error Messages -->
-                              @if (session('success'))
-                              <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                 <strong>{{ session('success') }}</strong>
-                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                 <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                              @endif
-                              @if (session('delete'))
-                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                 <strong>{{ session('delete') }}</strong>
-                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                 <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                              @endif
-                              @if ($errors->any())
-                              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                 <ul class="mb-0">
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                 </ul>
-                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                 <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                              @endif
                               <!-- Search Section -->
                               <div class="row mb-3">
                                  <div class="col-md-6">
@@ -124,11 +97,9 @@
                                              <button type="button" class="btn btn-info btn-sm mb-1" data-toggle="modal" data-target="#editBookModal{{ $book->id }}">
                                              Update
                                              </button>
-                                             <form action="{{ route('admin.books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?')" style="display:inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                             </form>
+                                             <button type="button" class="btn btn-danger btn-sm delete-book-btn" data-book-id="{{ $book->id }}" data-book-title="{{ $book->title }}">
+                                             Delete
+                                             </button>
                                           </td>
                                        </tr>
                                        @endforeach
@@ -145,6 +116,21 @@
                         <script>
                            $(document).ready(function () {
                               let allBookRows = $('.book-row');
+                           
+                              // Show popup messages for session success/error messages
+                              @if (session('success'))
+                                 showPopup('✅ {{ session('success') }}', 'success');
+                              @endif
+                              
+                              @if (session('delete'))
+                                 showPopup('✅ {{ session('delete') }}', 'success');
+                              @endif
+                              
+                              @if ($errors->any())
+                                 @foreach ($errors->all() as $error)
+                                    showPopup('❌ {{ $error }}', 'error');
+                                 @endforeach
+                              @endif
                            
                               // Search functionality
                               $('#bookSearch').on('input', function() {
@@ -189,9 +175,155 @@
                                     }
                                  }
                               }
+                              
+                              // Handle delete book with confirmation
+                              $('.delete-book-btn').click(function(e) {
+                                 e.preventDefault();
+                                 
+                                 const bookId = $(this).data('book-id');
+                                 const bookTitle = $(this).data('book-title');
+                                 const button = $(this);
+                                 
+                                 if (confirm('Are you sure you want to delete "' + bookTitle + '"?')) {
+                                    button.prop('disabled', true);
+                                    button.html('<i class="fas fa-spinner fa-spin"></i> Deleting...');
+                                    
+                                    // Create a form and submit it
+                                    const form = $('<form>', {
+                                       'method': 'POST',
+                                       'action': '/admin/books/' + bookId
+                                    });
+                                    
+                                    form.append($('<input>', {
+                                       'type': 'hidden',
+                                       'name': '_token',
+                                       'value': '{{ csrf_token() }}'
+                                    }));
+                                    
+                                    form.append($('<input>', {
+                                       'type': 'hidden',
+                                       'name': '_method',
+                                       'value': 'DELETE'
+                                    }));
+                                    
+                                    $('body').append(form);
+                                    form.submit();
+                                 }
+                              });
+                              
+                              // Show popup function
+                              function showPopup(message, type) {
+                                 const popup = $('<div class="popup"></div>')
+                                       .addClass(type === 'success' ? 'success-popup' : 'error-popup')
+                                       .text(message);
+                           
+                                 $('body').append(popup);
+                           
+                                 setTimeout(() => {
+                                       popup.fadeOut(500, () => popup.remove());
+                                 }, 3000);
+                              }
+                              
+                              // Handle form submissions with AJAX for better UX
+                              $('#addBookForm').on('submit', function(e) {
+                                 e.preventDefault();
+                                 
+                                 const form = $(this);
+                                 const submitBtn = $('button[type="submit"][form="addBookForm"]');
+                                 const formData = new FormData(this);
+                                 
+                                 submitBtn.prop('disabled', true);
+                                 submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Adding Book...');
+                                 
+                                 $.ajax({
+                                    url: form.attr('action'),
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                       showPopup('✅ Book added successfully!', 'success');
+                                       $('#addBookModal').modal('hide');
+                                       setTimeout(() => {
+                                          location.reload();
+                                       }, 1500);
+                                    },
+                                    error: function(xhr) {
+                                       const errors = xhr.responseJSON?.errors;
+                                       if (errors) {
+                                          Object.values(errors).flat().forEach(error => {
+                                             showPopup('❌ ' + error, 'error');
+                                          });
+                                       } else {
+                                          showPopup('❌ Failed to add book. Please try again.', 'error');
+                                       }
+                                       
+                                       submitBtn.prop('disabled', false);
+                                       submitBtn.html('Add Book');
+                                    }
+                                 });
+                              });
+                              
+                              // Handle edit form submissions
+                              $('[id^="editBookForm"]').on('submit', function(e) {
+                                 e.preventDefault();
+                                 
+                                 const form = $(this);
+                                 const bookId = form.attr('id').replace('editBookForm', '');
+                                 const submitBtn = $('button[type="submit"][form="editBookForm' + bookId + '"]');
+                                 const formData = new FormData(this);
+                                 
+                                 submitBtn.prop('disabled', true);
+                                 submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Updating...');
+                                 
+                                 $.ajax({
+                                    url: form.attr('action'),
+                                    method: 'POST',
+                                    data: formData,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function(response) {
+                                       showPopup('✅ Book updated successfully!', 'success');
+                                       $('#editBookModal' + bookId).modal('hide');
+                                       setTimeout(() => {
+                                          location.reload();
+                                       }, 1500);
+                                    },
+                                    error: function(xhr) {
+                                       const errors = xhr.responseJSON?.errors;
+                                       if (errors) {
+                                          Object.values(errors).flat().forEach(error => {
+                                             showPopup('❌ ' + error, 'error');
+                                          });
+                                       } else {
+                                          showPopup('❌ Failed to update book. Please try again.', 'error');
+                                       }
+                                       
+                                       submitBtn.prop('disabled', false);
+                                       submitBtn.html('Update');
+                                    }
+                                 });
+                              });
                            });
                         </script>
                         <style>
+                           .popup {
+                           position: fixed;
+                           top: 20px;
+                           right: 20px;
+                           padding: 15px 20px;
+                           border-radius: 5px;
+                           color: white;
+                           font-weight: bold;
+                           z-index: 9999;
+                           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                           }
+                           .success-popup {
+                           background-color: #28a745;
+                           }
+                           .error-popup {
+                           background-color: #dc3545;
+                           }
                            /* Search input styling */
                            #bookSearch {
                            border-radius: 4px;
@@ -292,21 +424,6 @@
                         </div>
                      </div>
                      @endforeach
-                     {{-- Script to handle form errors in modal --}}
-                     <script>
-                        // Show add book modal if there are validation errors
-                        @if ($errors->any() && session()->hasOldInput())
-                        $(document).ready(function() {
-                              $('#addBookModal').modal('show');
-                        });
-                        @endif
-                     </script>
-                     <!-- Auto-hide alerts after 4 seconds -->
-                     <script>
-                        setTimeout(function() {
-                              $('.alert').alert('close');
-                        }, 4000);
-                     </script>
                   </div>
                </div>
                <footer class="footer">

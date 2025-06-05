@@ -59,7 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/books', [AdminBookController::class, 'store'])->name('books.store');
         Route::delete('/books/{id}', [AdminBookController::class, 'destroy'])->name('books.destroy');
         Route::put('/books/{id}', [AdminBookController::class, 'update'])->name('books.update');
-        Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store');
+        Route::post('/books/store', [AdminBookController::class, 'store'])->name('books.store.alt');
         Route::get('/borrow-requests', [BorrowRequestController::class, 'index'])->name('borrow-requests');
         Route::post('/orders/{id}/accept', [BorrowRequestController::class, 'acceptOrder'])->name('orders.accept');
         Route::post('/orders/{id}/reject', [BorrowRequestController::class, 'rejectOrder'])->name('orders.reject');

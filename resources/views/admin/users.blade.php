@@ -11,8 +11,9 @@
          </nav>
          <div class="container-fluid page-body-wrapper">
             @include('admin.navbar')
+            <!-- resources\views\admin\users.blade.php -->
+            <!-- resources\views\admin\users.blade.php -->
             <div class="main-panel">
-               <!-- resources\views\admin\users.blade.php -->
                <div class="content-wrapper">
                   <div class="card">
                      <div class="card-body">
@@ -65,11 +66,10 @@
                                     <td>{{ $user->created_at->format('d M Y') }}</td>
                                     <td>{{ ucfirst($user->role) }}</td>
                                     <td>
-                                       <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                       </form>
+                                       <button type="button" class="btn btn-danger btn-sm delete-user-btn" 
+                                          data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}">
+                                       Delete
+                                       </button>
                                     </td>
                                  </tr>
                                  @endforeach
@@ -86,13 +86,12 @@
                   <!-- Add User Modal -->
                   <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
                      <div class="modal-dialog">
-                        <!-- removed modal-lg -->
                         <div class="modal-content">
                            <div class="modal-header">
                               <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                            </div>
-                           <form method="POST" action="{{ route('admin.users.store') }}">
+                           <form method="POST" action="{{ route('admin.users.store') }}" id="addUserForm">
                               @csrf
                               <div class="modal-body">
                                  <div class="mb-3">
@@ -126,16 +125,32 @@
                               </div>
                               <div class="modal-footer">
                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                 <button type="submit" class="btn btn-primary">Add User</button>
+                                 <button type="submit" class="btn btn-primary" id="addUserBtn">Add User</button>
                               </div>
                            </form>
                         </div>
                      </div>
                   </div>
                </div>
+               
                <script>
                   $(document).ready(function () {
                      let allUserRows = $('.user-row');
+                  
+                     // Show popup messages for session success/error messages
+                     @if (session('success'))
+                        showPopup('✅ {{ session('success') }}', 'success');
+                     @endif
+                     
+                     @if (session('delete'))
+                        showPopup('✅ {{ session('delete') }}', 'success');
+                     @endif
+                     
+                     @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                           showPopup('❌ {{ $error }}', 'error');
+                        @endforeach
+                     @endif
                   
                      // Search functionality
                      $('#userSearch').on('input', function() {
@@ -180,9 +195,114 @@
                            }
                         }
                      }
+                     
+                     // Handle delete user with confirmation
+                     $('.delete-user-btn').click(function(e) {
+                        e.preventDefault();
+                        
+                        const userId = $(this).data('user-id');
+                        const userName = $(this).data('user-name');
+                        const button = $(this);
+                        
+                        if (confirm('Are you sure you want to delete "' + userName + '"?')) {
+                           button.prop('disabled', true);
+                           button.html('<i class="fas fa-spinner fa-spin"></i> Deleting...');
+                           
+                           // Create a form and submit it
+                           const form = $('<form>', {
+                              'method': 'POST',
+                              'action': '{{ route("admin.users.delete", ":id") }}'.replace(':id', userId)
+                           });
+                           
+                           form.append($('<input>', {
+                              'type': 'hidden',
+                              'name': '_token',
+                              'value': '{{ csrf_token() }}'
+                           }));
+                           
+                           form.append($('<input>', {
+                              'type': 'hidden',
+                              'name': '_method',
+                              'value': 'DELETE'
+                           }));
+                           
+                           $('body').append(form);
+                           form.submit();
+                        }
+                     });
+                     
+                     // Show popup function
+                     function showPopup(message, type) {
+                        const popup = $('<div class="popup"></div>')
+                              .addClass(type === 'success' ? 'success-popup' : 'error-popup')
+                              .text(message);
+                  
+                        $('body').append(popup);
+                  
+                        setTimeout(() => {
+                              popup.fadeOut(500, () => popup.remove());
+                        }, 3000);
+                     }
+                     
+                     // Handle add user form submission with AJAX
+                     $('#addUserForm').on('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const form = $(this);
+                        const submitBtn = $('#addUserBtn');
+                        const formData = new FormData(this);
+                        
+                        submitBtn.prop('disabled', true);
+                        submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Adding User...');
+                        
+                        $.ajax({
+                           url: form.attr('action'),
+                           method: 'POST',
+                           data: formData,
+                           processData: false,
+                           contentType: false,
+                           success: function(response) {
+                              showPopup('✅ User added successfully!', 'success');
+                              $('#addUserModal').modal('hide');
+                              setTimeout(() => {
+                                 location.reload();
+                              }, 1500);
+                           },
+                           error: function(xhr) {
+                              const errors = xhr.responseJSON?.errors;
+                              if (errors) {
+                                 Object.values(errors).flat().forEach(error => {
+                                    showPopup('❌ ' + error, 'error');
+                                 });
+                              } else {
+                                 showPopup('❌ Failed to add user. Please try again.', 'error');
+                              }
+                              
+                              submitBtn.prop('disabled', false);
+                              submitBtn.html('Add User');
+                           }
+                        });
+                     });
                   });
                </script>
                <style>
+                  .popup {
+                  position: fixed;
+                  top: 20px;
+                  right: 20px;
+                  padding: 15px 20px;
+                  border-radius: 5px;
+                  color: white;
+                  font-weight: bold;
+                  z-index: 9999;
+                  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                  }
+                  .success-popup {
+                  background-color: #28a745;
+                  }
+                  .error-popup {
+                  background-color: #dc3545;
+                  }
                   /* Search input styling */
                   #userSearch {
                   border-radius: 4px;
@@ -197,19 +317,6 @@
          </div>
       </div>
       </div>
-      <script src="/admin/assets/vendors/js/vendor.bundle.base.js"></script>
-      <script src="/admin/assets/vendors/chart.js/Chart.min.js"></script>
-      <script src="/admin/assets/vendors/progressbar.js/progressbar.min.js"></script>
-      <script src="/admin/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-      <script src="/admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-      <script src="/admin/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
-      <script src="/admin/assets/js/off-canvas.js"></script>
-      <script src="/admin/assets/js/hoverable-collapse.js"></script>
-      <script src="/admin/assets/js/misc.js"></script>
-      <script src="/admin/assets/js/settings.js"></script>
-      <script src="/admin/assets/js/todolist.js"></script>
-      <script src="/admin/assets/js/dashboard.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+     
    </body>
 </html>

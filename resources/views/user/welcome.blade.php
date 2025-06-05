@@ -175,33 +175,7 @@
                            </div>
                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
                            <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-                           <ol>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-shopping-cart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-heart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-envelope"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-share-alt"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-search"></i>
-                                 </a>
-                              </li>
-                           </ol>
+                          
                         </div>
                      </figcaption>
                   </figure>
@@ -223,33 +197,7 @@
                            </div>
                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
                            <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-                           <ol>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-shopping-cart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-heart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-envelope"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-share-alt"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-search"></i>
-                                 </a>
-                              </li>
-                           </ol>
+                          
                         </div>
                      </figcaption>
                   </figure>
@@ -271,33 +219,7 @@
                            </div>
                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
                            <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-                           <ol>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-shopping-cart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-heart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-envelope"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-share-alt"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-search"></i>
-                                 </a>
-                              </li>
-                           </ol>
+                          
                         </div>
                      </figcaption>
                   </figure>
@@ -319,33 +241,7 @@
                            </div>
                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Pellentesque dolor turpis, pulvinar varius.</p>
                            <a href="#">Read More <i class="fa fa-long-arrow-right"></i></a>
-                           <ol>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-shopping-cart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-heart"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-envelope"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-share-alt"></i>
-                                 </a>
-                              </li>
-                              <li>
-                                 <a href="#">
-                                 <i class="fa fa-search"></i>
-                                 </a>
-                              </li>
-                           </ol>
+                          
                         </div>
                      </figcaption>
                   </figure>

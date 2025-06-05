@@ -104,55 +104,7 @@
                      <div class="row">
                         <div class="contact-area">
                            <div class="container">
-                              <!-- <div class="contact-form bg-light margin-right">
-                                 <h2>Send us a message</h2>
-                                 <span class="underline left"></span>
-                                 <div class="contact-fields">
-                                     <form id="contact" name="contact" action="http://libraria.demo.presstigers.com/contact.html" method="post" >
-                                         <div class="row">
-                                             <div class="col-md-6 col-sm-6">
-                                                 <div class="form-group">
-                                                     <input class="form-control" type="text" placeholder="First Name" name="first-name" id="first-name" size="30" value="" aria-required="true" />
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-6 col-sm-6">
-                                                 <div class="form-group">
-                                                     <input class="form-control" type="text" placeholder="Last Name" name="last-name" id="last-name" size="30" value="" aria-required="true" />
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-6 col-sm-6">
-                                                 <div class="form-group">
-                                                     <input class="form-control" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Email" name="email" id="email" size="30" value="" aria-required="true" />
-                                                 </div>
-                                             </div>
-                                             <div class="col-md-6 col-sm-6">
-                                                 <div class="form-group">
-                                                     <input class="form-control" type="text" placeholder="Phone Number" name="phone" id="phone" size="30" value="" aria-required="true" />
-                                                 </div>
-                                             </div>
-                                             <div class="col-sm-12">
-                                                 <div class="form-group">
-                                                     <textarea class="form-control" placeholder="Your message" id="message" aria-required="true"></textarea>
-                                                     <div class="clearfix"></div>
-                                                 </div>
-                                             </div>
-                                             <div class="col-sm-12">
-                                                 <div class="form-group form-submit">
-                                                     <input class="btn btn-default" id="submit-contact-form" type="button" name="submit" value="Send Message"  />
-                                                 </div>
-                                             </div>
-                                             <div id="success">
-                                                 <span>Your message was sent successfully! Our team will contact you soon.</span>
-                                             </div>
-                                 
-                                             <div id="error">
-                                                 <span>Something went wrong, try refreshing and submitting the form again.</span>
-                                             </div>
-                                         </div>
-                                     </form> 
-                                 </div>                                                                   
-                                 </div>
-                                 </div> -->
+                              
                            </div>
                         </div>
                      </div>
