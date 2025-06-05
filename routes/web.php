@@ -72,7 +72,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/users', [AdminAuthController::class, 'showUsers'])->name('users');
         Route::delete('/users/{user}', [AdminAuthController::class, 'deleteUser'])->name('users.delete');
         Route::post('/users/store', [AdminAuthController::class, 'storeUser'])->name('users.store');
-        Route::get('/index', [DashboardController::class, 'index'])->name('admin.index');
+        Route::get('/index', [DashboardController::class, 'index'])->name('index');
+        Route::post('/index/mark-returned/{id}', [App\Http\Controllers\Admin\DashboardController::class, 'markAsReturned'])->name('admin.index.mark-returned');
+    
 
     });
 });

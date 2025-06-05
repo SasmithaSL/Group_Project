@@ -12,6 +12,8 @@
          <div class="container-fluid page-body-wrapper">
             @include('admin.navbar')
             <div class="main-panel">
+                  <!-- resources\views\admin\users.blade.php -->
+
                <div class="content-wrapper">
                  <div class="card">
                         <div class="card-body">

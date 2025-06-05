@@ -155,13 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="filter-buttons">
-                    <div class="filter btn" data-filter="all">Books</div>
-                    <div class="filter btn" data-filter=".adults">Magazines</div>
-                    <div class="filter btn" data-filter=".kids-teens">Kids &amp; Teens</div>
-                    <div class="filter btn" data-filter=".video">Adults</div>
-                    
-                </div>
+              
             </div>
             <div id="category-filter">
                 <ul class="category-list">

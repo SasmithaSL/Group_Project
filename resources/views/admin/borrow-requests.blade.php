@@ -17,9 +17,9 @@
             <!-- partial -->
             <div class="main-panel">
                <div class="content-wrapper">
-                 <div class="row">
+                  <div class="row">
                      <div class = "col-md-12 grid-margin stretch-card">
-                       <!-- resources\views\admin\borrow-requests.blade.php -->
+                        <!-- resources\views\admin\borrow-requests.blade.php -->
                         <div class="card">
                            <div class="card-body">
                               <h4 class="card-title">Borrow Requests Management</h4>
@@ -28,6 +28,27 @@
                                  {{ session('success') }}
                               </div>
                               @endif
+                              <!-- Search Section -->
+                              <div class="row mb-3">
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label for="orderSearch">Search by Order Number:</label>
+                                       <div class="input-group">
+                                          <input type="text" class="form-control" id="orderSearch" 
+                                             placeholder="Enter order number..." autocomplete="off">
+                                          
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6">
+                                    <div class="form-group">
+                                       <label>&nbsp;</label>
+                                       <div>
+                                          <small class="text-muted" id="searchResults"></small>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
                               <div class="table-responsive">
                                  <table class="table table-bordered">
                                     <thead>
@@ -40,9 +61,9 @@
                                           <th>Actions</th>
                                        </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="ordersTableBody">
                                        @forelse($orders as $order)
-                                       <tr id="order-row-{{ $order->id }}">
+                                       <tr id="order-row-{{ $order->id }}" class="order-row" data-order-number="{{ strtolower($order->order_code) }}">
                                           <td>
                                              <strong>{{ $order->order_code }}</strong>
                                              @if($order->issued_at)
@@ -137,7 +158,7 @@
                                           </td>
                                        </tr>
                                        @empty
-                                       <tr>
+                                       <tr id="no-orders-row">
                                           <td colspan="6" class="text-center">No borrow requests found.</td>
                                        </tr>
                                        @endforelse
@@ -173,6 +194,56 @@
                               <script>
                                  $(document).ready(function () {
                                     let currentOrderId = null;
+                                    let allRows = $('.order-row');
+                                 
+                                    // Search functionality
+                                    $('#orderSearch').on('input', function() {
+                                       const searchTerm = $(this).val().toLowerCase().trim();
+                                       
+                                       if (searchTerm === '') {
+                                          // Show all rows
+                                          allRows.show();
+                                          updateSearchResults('');
+                                       } else {
+                                          let visibleCount = 0;
+                                          
+                                          allRows.each(function() {
+                                             const orderNumber = $(this).data('order-number');
+                                             if (orderNumber.includes(searchTerm)) {
+                                                $(this).show();
+                                                visibleCount++;
+                                             } else {
+                                                $(this).hide();
+                                             }
+                                          });
+                                          
+                                          updateSearchResults(searchTerm, visibleCount);
+                                       }
+                                    });
+                                    
+                                    // Clear search
+                                    $('#clearSearch').click(function() {
+                                       $('#orderSearch').val('');
+                                       allRows.show();
+                                       updateSearchResults('');
+                                       $('#orderSearch').focus();
+                                    });
+                                    
+                                    // Update search results text
+                                    function updateSearchResults(searchTerm, visibleCount = null) {
+                                       const resultsElement = $('#searchResults');
+                                       
+                                       if (searchTerm === '') {
+                                          resultsElement.text('');
+                                       } else {
+                                          const totalCount = allRows.length;
+                                          if (visibleCount === 0) {
+                                             resultsElement.html('<i class="fas fa-exclamation-triangle text-warning"></i> No orders found matching "' + searchTerm + '"');
+                                          } else {
+                                             resultsElement.html('<i class="fas fa-search text-info"></i> Found ' + visibleCount + ' of ' + totalCount + ' orders');
+                                          }
+                                       }
+                                    }
                                  
                                     // Accept Order
                                     $('.accept-order').click(function (e) {
@@ -212,7 +283,7 @@
                                              });
                                        }
                                     });
-
+                                 
                                     // Issue Order
                                     $('.issue-order').click(function (e) {
                                        e.preventDefault();
@@ -379,6 +450,21 @@
                                  .error-popup {
                                  background-color: #dc3545;
                                  }
+                                 /* Search input styling */
+                                 #orderSearch {
+                                 border-radius: 4px 0 0 4px;
+                                 }
+                                 #clearSearch {
+                                 border-radius: 0 4px 4px 0;
+                                 border-left: 0;
+                                 }
+                                 #clearSearch:hover {
+                                 background-color: #e9ecef;
+                                 }
+                                 /* Highlight matching rows */
+                                 .order-row {
+                                 transition: background-color 0.2s ease;
+                                 }
                               </style>
                            </div>
                         </div>
@@ -389,6 +475,5 @@
             </div>
          </div>
       </div>
-     
    </body>
 </html>
