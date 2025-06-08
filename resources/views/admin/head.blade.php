@@ -108,3 +108,15 @@
 <script src="/admin/assets/js/dashboard.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+<script src="../../../admin/assets/vendors/js/vendor.bundle.base.js"></script>
+<script src="../../../admin/assets/vendors/select2/select2.min.js"></script>
+<script src="../../../admin/assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+<script src="../../../admin/assets/js/off-canvas.js"></script>
+<script src="../../../admin/assets/js/hoverable-collapse.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../../../admin/assets/js/misc.js"></script>
+<script src="../../../admin/assets/js/settings.js"></script>
+<script src="../../../admin/assets/js/todolist.js"></script>
+<script src="../../../admin/assets/js/file-upload.js"></script>
+<script src="../../../admin/assets/js/typeahead.js"></script>
+<script src="../../../admin/assets/js/select2.js"></script>

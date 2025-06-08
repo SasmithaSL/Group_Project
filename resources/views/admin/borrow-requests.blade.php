@@ -3,7 +3,6 @@
    @include('admin.head')
    <body>
       <div class="container-scroller">
-         <!-- partial:../../partials/_sidebar.html -->
          <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
                <a class="sidebar-brand brand-logo" href="../../index.html"><img src="../../../admin/assets/images/logo.png" alt="logo" /></a>
@@ -11,15 +10,12 @@
             </div>
             @include('admin.sidebar')
          </nav>
-         <!-- partial -->
          <div class="container-fluid page-body-wrapper">
             @include('admin.navbar')
-            <!-- partial -->
             <div class="main-panel">
                <div class="content-wrapper">
                   <div class="row">
                      <div class = "col-md-12 grid-margin stretch-card">
-                        <!-- resources\views\admin\borrow-requests.blade.php -->
                         <div class="card">
                            <div class="card-body">
                               <h4 class="card-title">Borrow Requests Management</h4>
@@ -28,7 +24,6 @@
                                  {{ session('success') }}
                               </div>
                               @endif
-                              <!-- Search Section -->
                               <div class="row mb-3">
                                  <div class="col-md-6">
                                     <div class="form-group">
@@ -164,7 +159,6 @@
                                     </tbody>
                                  </table>
                               </div>
-                              <!-- Reject Order Modal -->
                               <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog">
                                  <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -220,7 +214,6 @@
                                        }
                                     });
                                     
-                                    // Clear search
                                     $('#clearSearch').click(function() {
                                        $('#orderSearch').val('');
                                        allRows.show();
@@ -228,7 +221,6 @@
                                        $('#orderSearch').focus();
                                     });
                                     
-                                    // Update search results text
                                     function updateSearchResults(searchTerm, visibleCount = null) {
                                        const resultsElement = $('#searchResults');
                                        
@@ -244,7 +236,6 @@
                                        }
                                     }
                                  
-                                    // Accept Order
                                     $('.accept-order').click(function (e) {
                                        e.preventDefault();
                                        
@@ -283,7 +274,6 @@
                                        }
                                     });
                                  
-                                    // Issue Order
                                     $('.issue-order').click(function (e) {
                                        e.preventDefault();
                                        
@@ -322,7 +312,6 @@
                                        }
                                     });
                                  
-                                    // Reject Order
                                     $('.reject-order').click(function (e) {
                                        e.preventDefault();
                                        
@@ -378,7 +367,6 @@
                                        });
                                     });
                                  
-                                    // Mark as Returned
                                     $('.mark-returned').click(function (e) {
                                        e.preventDefault();
                                        
@@ -417,7 +405,6 @@
                                        }
                                     });
                                  
-                                    // Show popup function
                                     function showPopup(message, type) {
                                        const popup = $('<div class="popup"></div>')
                                              .addClass(type === 'success' ? 'success-popup' : 'error-popup')
@@ -449,7 +436,6 @@
                                  .error-popup {
                                  background-color: #dc3545;
                                  }
-                                 /* Search input styling */
                                  #orderSearch {
                                  border-radius: 4px 0 0 4px;
                                  }
@@ -460,7 +446,6 @@
                                  #clearSearch:hover {
                                  background-color: #e9ecef;
                                  }
-                                 /* Highlight matching rows */
                                  .order-row {
                                  transition: background-color 0.2s ease;
                                  }

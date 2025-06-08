@@ -53,20 +53,9 @@
                      </div>
                   </div>
                </div>
-               <!-- content-wrapper ends -->
             </div>
-            <!-- row ends -->
          </div>
-         <!-- page-body-wrapper ends -->
       </div>
-      <!-- container-scroller -->
-      <!-- plugins:js -->
       <script src="../../../admin/assets/vendors/js/vendor.bundle.base.js"></script>
-      <!-- endinject -->
-      <!-- Plugin js for this page -->
-      <!-- End plugin js for this page -->
-      <!-- inject:js -->
-    
-      <!-- endinject -->
    </body>
 </html>

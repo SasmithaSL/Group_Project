@@ -11,8 +11,6 @@
          </nav>
          <div class="container-fluid page-body-wrapper">
             @include('admin.navbar')
-            <!-- resources\views\admin\users.blade.php -->
-            <!-- resources\views\admin\users.blade.php -->
             <div class="main-panel">
                <div class="content-wrapper">
                   <div class="card">
@@ -23,7 +21,6 @@
                            <i class="fas fa-plus"></i> + Add User
                            </button>
                         </div>
-                        <!-- Search Section -->
                         <div class="row mb-3">
                            <div class="col-md-6">
                               <div class="form-group">
@@ -152,12 +149,10 @@
                         @endforeach
                      @endif
                   
-                     // Search functionality
                      $('#userSearch').on('input', function() {
                         const searchTerm = $(this).val().toLowerCase().trim();
                         
                         if (searchTerm === '') {
-                           // Show all rows
                            allUserRows.show();
                            updateSearchResults('');
                         } else {
@@ -180,7 +175,6 @@
                         }
                      });
                      
-                     // Update search results text
                      function updateSearchResults(searchTerm, visibleCount = null) {
                         const resultsElement = $('#searchResults');
                         
@@ -196,7 +190,6 @@
                         }
                      }
                      
-                     // Handle delete user with confirmation
                      $('.delete-user-btn').click(function(e) {
                         e.preventDefault();
                         

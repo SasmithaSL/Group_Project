@@ -23,11 +23,8 @@
             </style>
             <div class="main-panel">
                <div class="content-wrapper">
-                  <!-- resources\views\admin\manage-books.blade.php -->
-                  <!-- resources\views\admin\manage-books.blade.php -->
                   <div class="row">
                      <div class="col-md-12 grid-margin stretch-card">
-                        <!-- resources\views\admin\manage-books.blade.php -->
                         <div class="card">
                            <div class="card-body">
                               <div class="d-flex justify-content-between align-items-center mb-3">
@@ -36,7 +33,6 @@
                                  <i class="fa fa-plus"></i> + Add New Book
                                  </button>
                               </div>
-                              <!-- Search Section -->
                               <div class="row mb-3">
                                  <div class="col-md-6">
                                     <div class="form-group">
@@ -132,7 +128,6 @@
                                  @endforeach
                               @endif
                            
-                              // Search functionality
                               $('#bookSearch').on('input', function() {
                                  const searchTerm = $(this).val().toLowerCase().trim();
                                  
@@ -160,7 +155,6 @@
                                  }
                               });
                               
-                              // Update search results text
                               function updateSearchResults(searchTerm, visibleCount = null) {
                                  const resultsElement = $('#searchResults');
                                  
@@ -176,7 +170,6 @@
                                  }
                               }
                               
-                              // Handle delete book with confirmation
                               $('.delete-book-btn').click(function(e) {
                                  e.preventDefault();
                                  
@@ -211,7 +204,6 @@
                                  }
                               });
                               
-                              // Show popup function
                               function showPopup(message, type) {
                                  const popup = $('<div class="popup"></div>')
                                        .addClass(type === 'success' ? 'success-popup' : 'error-popup')
@@ -224,7 +216,6 @@
                                  }, 3000);
                               }
                               
-                              // Handle form submissions with AJAX for better UX
                               $('#addBookForm').on('submit', function(e) {
                                  e.preventDefault();
                                  
@@ -264,7 +255,6 @@
                                  });
                               });
                               
-                              // Handle edit form submissions
                               $('[id^="editBookForm"]').on('submit', function(e) {
                                  e.preventDefault();
                                  
@@ -324,11 +314,9 @@
                            .error-popup {
                            background-color: #dc3545;
                            }
-                           /* Search input styling */
                            #bookSearch {
                            border-radius: 4px;
                            }
-                           /* Highlight matching rows */
                            .book-row {
                            transition: background-color 0.2s ease;
                            }
@@ -431,17 +419,5 @@
             </div>
          </div>
       </div>
-      <script src="../../../admin/assets/vendors/js/vendor.bundle.base.js"></script>
-      <script src="../../../admin/assets/vendors/select2/select2.min.js"></script>
-      <script src="../../../admin/assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
-      <script src="../../../admin/assets/js/off-canvas.js"></script>
-      <script src="../../../admin/assets/js/hoverable-collapse.js"></script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="../../../admin/assets/js/misc.js"></script>
-      <script src="../../../admin/assets/js/settings.js"></script>
-      <script src="../../../admin/assets/js/todolist.js"></script>
-      <script src="../../../admin/assets/js/file-upload.js"></script>
-      <script src="../../../admin/assets/js/typeahead.js"></script>
-      <script src="../../../admin/assets/js/select2.js"></script>
    </body>
 </html>

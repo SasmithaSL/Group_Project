@@ -7,21 +7,18 @@
       <section class="page-banner services-banner">
          <div class="container">
             <div class="banner-header">
-               <h2>Books & Media Listing</h2>
+               <h2 style="padding-top: 10px;">Books & Media Listing</h2>
                <span class="underline center"></span>
             </div>
          </div>
       </section>
       <!-- End: Page Banner -->
-      <!-- Start: Products Section -->
       <div id="content" class="site-content">
          <div id="primary" class="content-area">
             <main id="main" class="site-main">
                <div class="books-media-gird">
                   <div class="container">
                      <div class="row">
-                        <!-- Start: Search Section -->
-                        <!-- Start: Search Section -->
                         <section class="search-filters">
                            <div class="container">
                               <div class="filter-box">
@@ -42,37 +39,6 @@
                               </div>
                            </div>
                         </section>
-                        <style>
-                           .search-filters {
-                           text-align: center !important;
-                           }
-                           .search-filters .container {
-                           display: flex !important;
-                           justify-content: center !important;
-                           }
-                           .filter-box {
-                           width: 100% !important;
-                           max-width: 800px !important;
-                           }
-                           .filter-box form {
-                           display: flex !important;
-                           justify-content: center !important;
-                           align-items: center !important;
-                           gap: 10px !important;
-                           flex-wrap: wrap !important;
-                           }
-                           @media (max-width: 768px) {
-                           .filter-box form {
-                           flex-direction: column !important;
-                           gap: 15px !important;
-                           }
-                           .form-control {
-                           width: 100% !important;
-                           max-width: 300px !important;
-                           }
-                           }
-                        </style>
-                        <!-- End: Search Section -->
                      </div>
                      <div class="row">
                         <div class="col-md-9 col-md-push-3">
@@ -131,11 +97,9 @@
                               @endif
                            </div>
                            @if($books->hasPages())
-                           <!-- Custom Pagination -->
                            <nav class="navigation pagination text-center">
                               <h2 class="screen-reader-text">Posts navigation</h2>
                               <div class="nav-links" style="margin-bottom: 35px;">
-                                 {{-- Previous Link --}}
                                  @if($books->onFirstPage())
                                  <span class="prev page-numbers disabled"><i class="fa fa-long-arrow-left"></i>
                                  Previous</span>
@@ -143,7 +107,6 @@
                                  <a class="prev page-numbers" href="{{ $books->previousPageUrl() }}"><i
                                     class="fa fa-long-arrow-left"></i> Previous</a>
                                  @endif
-                                 {{-- Page Links --}}
                                  @foreach($books->getUrlRange(1, $books->lastPage()) as $page => $url)
                                  @if ($page == $books->currentPage())
                                  <span class="page-numbers current">{{ $page }}</span>
@@ -151,7 +114,6 @@
                                  <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
                                  @endif
                                  @endforeach
-                                 {{-- Next Link --}}
                                  @if($books->hasMorePages())
                                  <a class="next page-numbers" href="{{ $books->nextPageUrl() }}">Next <i
                                     class="fa fa-long-arrow-right"></i></a>
@@ -171,6 +133,36 @@
          </main>
       </div>
       </div>
+      <style>
+         .search-filters {
+         text-align: center !important;
+         }
+         .search-filters .container {
+         display: flex !important;
+         justify-content: center !important;
+         }
+         .filter-box {
+         width: 100% !important;
+         max-width: 800px !important;
+         }
+         .filter-box form {
+         display: flex !important;
+         justify-content: center !important;
+         align-items: center !important;
+         gap: 10px !important;
+         flex-wrap: wrap !important;
+         }
+         @media (max-width: 768px) {
+         .filter-box form {
+         flex-direction: column !important;
+         gap: 15px !important;
+         }
+         .form-control {
+         width: 100% !important;
+         max-width: 300px !important;
+         }
+         }
+      </style>
       @include('user.footer')
    </body>
 </html>
