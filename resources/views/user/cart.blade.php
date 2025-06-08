@@ -123,7 +123,6 @@
                 const selectAllBtn = document.getElementById('selectAllBtn');
                 const deselectAllBtn = document.getElementById('deselectAllBtn');
             
-                // Select All functionality
                 selectAllBtn.addEventListener('click', function() {
                     const checkboxes = document.querySelectorAll('input[name="selected_books[]"]');
                     checkboxes.forEach(function(checkbox) {
@@ -131,7 +130,6 @@
                     });
                 });
             
-                // Deselect All functionality
                 deselectAllBtn.addEventListener('click', function() {
                     const checkboxes = document.querySelectorAll('input[name="selected_books[]"]');
                     checkboxes.forEach(function(checkbox) {
@@ -139,7 +137,6 @@
                     });
                 });
             
-                // Show modal when checkout button is clicked
                 checkoutBtn.addEventListener('click', function() {
                     const selectedBooks = document.querySelectorAll('input[name="selected_books[]"]:checked');
                     
@@ -148,7 +145,6 @@
                         return;
                     }
             
-                    // Display selected books in modal
                     bookList.innerHTML = '';
                     selectedBooks.forEach(function(checkbox) {
                         const title = checkbox.getAttribute('data-title');
@@ -166,13 +162,11 @@
                     checkoutModal.style.display = 'block';
                 });
             
-                // Close modal
                 closeModalBtn.addEventListener('click', function() {
                     checkoutModal.style.display = 'none';
                     resetModal();
                 });
             
-                // Place order
                 placeOrderBtn.addEventListener('click', function() {
                     const selectedBooks = Array.from(document.querySelectorAll('input[name="selected_books[]"]:checked')).map(cb => cb.value);
                     
@@ -181,11 +175,9 @@
                         return;
                     }
             
-                    // Show loading
                     placeOrderBtn.style.display = 'none';
                     loading.style.display = 'block';
             
-                    // Submit the order
                     fetch('{{ route("cart.process") }}', {
                         method: 'POST',
                         headers: {
@@ -215,12 +207,10 @@
                     });
                 });
             
-                // OK button to close modal and refresh page
                 okBtn.addEventListener('click', function() {
                     window.location.reload();
                 });
             
-                // Remove item from cart
                 document.querySelectorAll('.remove-btn').forEach(function(btn) {
                     btn.addEventListener('click', function(e) {
                         e.preventDefault();
@@ -239,7 +229,6 @@
                     bookList.innerHTML = '';
                 }
             
-                // Close modal when clicking outside
                 window.addEventListener('click', function(event) {
                     if (event.target === checkoutModal) {
                         checkoutModal.style.display = 'none';

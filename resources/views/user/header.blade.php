@@ -20,11 +20,6 @@
                   <div class="header-topbar hidden-sm hidden-xs">
                      <div class="row">
                         <div class="col-sm-6">
-                           <!-- <div class="topbar-info">
-                              <a href="tel:+61-3-8376-6284"><i class="fa fa-phone"></i>+119</a>
-                              <span>/</span>
-                              <a href="mailto:support@libraria.com"><i class="fa fa-envelope"></i>support@libraria.com</a>
-                              </div> -->
                         </div>
                         <div class="col-sm-6">
                            <div class="topbar-links">
@@ -163,4 +158,3 @@
       </div>
    </div>
 </header>
-<!-- End: Header Section -->

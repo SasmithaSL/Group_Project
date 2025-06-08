@@ -15,7 +15,6 @@
          <div class="main-panel">
             <div class="content-wrapper">
                <div class="row">
-                  <!-- Display Events -->
                   <div class="col-md-12 grid-margin stretch-card">
                      <div class="card">
                         <div class="card-body">
@@ -25,7 +24,6 @@
                               + Add Event
                               </button>
                            </div>
-                           <!-- Search Section -->
                            <div class="row mb-3">
                               <div class="col-md-6">
                                  <div class="form-group">
@@ -102,7 +100,6 @@
                         </div>
                      </div>
                   </div>
-                  <!-- Add/Update Event Modal -->
                   <div class="modal fade" id="addEventModal" tabindex="-1" role="dialog" aria-labelledby="addEventModalLabel" aria-hidden="true">
                      <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content" style="width: 350px;">
@@ -252,7 +249,6 @@
                               }
                            });
                            
-                           // Update search results text
                            function updateSearchResults(searchTerm, visibleCount = null) {
                               const resultsElement = $('#searchResults');
                               
@@ -268,7 +264,6 @@
                               }
                            }
                            
-                           // Handle delete event with confirmation
                            $('.delete-event-btn').click(function(e) {
                               e.preventDefault();
                               
@@ -280,7 +275,6 @@
                                  button.prop('disabled', true);
                                  button.html('<i class="fas fa-spinner fa-spin"></i> Deleting...');
                                  
-                                 // Create a form and submit it
                                  const form = $('<form>', {
                                     'method': 'POST',
                                     'action': '/admin/events/' + eventId
@@ -303,7 +297,6 @@
                               }
                            });
                            
-                           // Show popup function
                            function showPopup(message, type) {
                               const popup = $('<div class="popup"></div>')
                                     .addClass(type === 'success' ? 'success-popup' : 'error-popup')
@@ -316,7 +309,6 @@
                               }, 3000);
                            }
                            
-                           // Handle event form submission with AJAX
                            $('#eventForm').on('submit', function(e) {
                               e.preventDefault();
                               

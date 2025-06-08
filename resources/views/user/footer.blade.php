@@ -36,7 +36,7 @@
                      <ul id="menu-quick-links" class="menu">
                         <li><a href="#">Home </a></li>
                         <li><a href="#">Books & Media </a></li>
-                        <li><a href="#">Cart</a></li>
+                        <li><a href="/cart">Cart</a></li>
                         <li><a href="#">Checkout</a></li>
                         <li><a href="#">Services</a></li>
                         <li><a href="#">Contact</a></li>

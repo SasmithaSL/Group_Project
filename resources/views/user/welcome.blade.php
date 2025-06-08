@@ -3,9 +3,7 @@
    <body>
       @include('user.head')
       @include('user.header')
-      <!-- Start: Slider Section -->
       <div data-ride="carousel" class="carousel slide" id="home-v1-header-carousel">
-         <!-- Carousel slides -->
          <div class="carousel-inner">
             <div class="item active">
                <figure>
@@ -24,8 +22,6 @@
             </div>
          </div>
       </div>
-      <!-- End: Slider Section -->
-      <!-- Start: Search Section -->
       <section class="search-filters">
          <div class="container">
             <div class="filter-box">
@@ -76,8 +72,6 @@
          }
          }
       </style>
-      <!-- End: Search Section -->
-      <!-- Start: Welcome Section -->
       <section class="welcome-section">
          <div class="container">
             <div class="row">
@@ -95,8 +89,6 @@
          </div>
          <div class="welcome-image"></div>
       </section>
-      <!-- End: Welcome Section -->
-      <!-- Start: Meet Staff -->
       <section class="team section-padding">
          <div class="container">
             <div class="center-content">
@@ -143,8 +135,6 @@
             </div>
          </div>
       </section>
-      <!-- End: Meet Staff -->
-      <!-- Start: Category Filter -->
       <section class="category-filter section-padding">
          <div class="container">
             <div class="center-content">
@@ -253,8 +243,6 @@
             <div class="clearfix"></div>
          </div>
       </section>
-      <!-- Start: Category Filter -->
-      <!-- Start: News & Event -->
       <section class="news-events section-padding banner">
          <div class="container">
             <div class="center-content">

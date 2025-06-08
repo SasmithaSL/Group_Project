@@ -11,85 +11,10 @@
       </div>
    </div>
 </section>
-<style>
-   document.addEventListener('DOMContentLoaded', function() {
-   // Generate QR Code
-   document.querySelectorAll('.generate-qr').forEach(button => {
-   button.addEventListener('click', function() {
-   // Get data from individual attributes
-   const orderData = {
-   order_code: this.getAttribute('data-order-code'),
-   book_ids: JSON.parse(this.getAttribute('data-book-ids') || '[]'),
-   borrowed_at: this.getAttribute('data-borrowed-at'),
-   due_at: this.getAttribute('data-due-at')
-   };
-   const qrOutput = this.parentElement.querySelector('.qr-output');
-   const downloadBtn = this.parentElement.querySelector('.download-qr');
-   // Create QR code
-   const qr = qrcode(0, 'M');
-   qr.addData(JSON.stringify(orderData));
-   qr.make();
-   // Display QR code
-   qrOutput.innerHTML = `
-   <div style="margin-top: 10px;">
-      ${qr.createImgTag(3)}
-      <br><small class="text-muted">Show this QR at library</small>
-   </div>
-   `;
-   // Show download button
-   downloadBtn.style.display = 'inline-block';
-   // Set up download functionality
-   const canvas = qrOutput.querySelector('img');
-   if (canvas) {
-   const downloadCanvas = document.createElement('canvas');
-   const ctx = downloadCanvas.getContext('2d');
-   const img = new Image();
-   img.onload = function() {
-   downloadCanvas.width = img.width;
-   downloadCanvas.height = img.height;
-   ctx.drawImage(img, 0, 0);
-   downloadBtn.href = downloadCanvas.toDataURL('image/png');
-   };
-   img.src = canvas.src;
-   }
-   // Hide generate button after first use
-   this.style.display = 'none';
-   });
-   });
-   // Cancel Order (keeping your existing code)
-   document.querySelectorAll('.cancel-order').forEach(button => {
-   button.addEventListener('click', function() {
-   const orderId = this.getAttribute('data-id');
-   if (confirm('Are you sure you want to cancel this book request?')) {
-   fetch(`/orders/${orderId}/cancel`, {
-   method: 'POST',
-   headers: {
-   'X-CSRF-TOKEN': '{{ csrf_token() }}',
-   'Content-Type': 'application/json',
-   }
-   })
-   .then(response => response.json())
-   .then(data => {
-   if (data.success) {
-   alert('Your request has been cancelled successfully.');
-   location.reload();
-   } else {
-   alert('Error: ' + data.message);
-   }
-   })
-   .catch(error => {
-   console.error('Error:', error);
-   alert('An error occurred while cancelling the request.');
-   });
-   }
-   });
-   });
-   });
-</style>
+
 <div class="site-content" id="content">
    <div class="content-area" id="primary">
       <main class="site-main" id="main">
-         <!-- resources\views\user\orders.blade.php -->
          <div class="cart-main">
             <div class="container">
                <div class="center-content">
@@ -213,57 +138,8 @@
                @endif
             </div>
          </div>
-         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Generate QR Code
-                document.querySelectorAll('.generate-qr').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const orderData = JSON.parse(this.getAttribute('data-order'));
-                        const qrOutput = this.parentElement.querySelector('.qr-output');
-                        const downloadBtn = this.parentElement.querySelector('.download-qr');
-                        
-                        // Create QR code
-                        const qr = qrcode(0, 'M');
-                        qr.addData(JSON.stringify(orderData));
-                        qr.make();
-                        
-                        // Display QR code
-                        qrOutput.innerHTML = `
-                            <div style="margin-top: 10px;">
-                                ${qr.createImgTag(3)}
-                                <br><small class="text-muted">Show this QR at library</small>
-                            </div>
-                        `;
-                        
-                        // Show download button
-                        downloadBtn.style.display = 'inline-block';
-                        
-                        // Set up download functionality
-                        const canvas = qrOutput.querySelector('img');
-                        if (canvas) {
-                            const downloadCanvas = document.createElement('canvas');
-                            const ctx = downloadCanvas.getContext('2d');
-                            const img = new Image();
-                            
-                            img.onload = function() {
-                                downloadCanvas.width = img.width;
-                                downloadCanvas.height = img.height;
-                                ctx.drawImage(img, 0, 0);
-                                
-                                downloadBtn.href = downloadCanvas.toDataURL('image/png');
-                            };
-                            
-                            img.src = canvas.src;
-                        }
-                        
-                        // Hide generate button after first use
-                        this.style.display = 'none';
-                    });
-                });
-            
-                // Cancel Order
-                document.querySelectorAll('.cancel-order').forEach(button => {
+       <script>
+         document.querySelectorAll('.cancel-order').forEach(button => {
                     button.addEventListener('click', function() {
                         const orderId = this.getAttribute('data-id');
                         
@@ -290,9 +166,7 @@
                             });
                         }
                     });
-                });
-            });
-         </script>
+       </script>
       </main>
    </div>
 </div>

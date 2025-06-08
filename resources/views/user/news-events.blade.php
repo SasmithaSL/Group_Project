@@ -17,7 +17,6 @@
       <main id="main" class="site-main">
          <div class="main-news-list">
             <div class="container">
-               <!-- Start: Search Section -->
                <section class="search-filters">
                   <div class="container">
                      <div class="filter-box">
@@ -39,37 +38,6 @@
                   </div>
                   <div class="clear"></div>
                </section>
-               <style>
-                  .search-filters {
-                  text-align: center !important;
-                  }
-                  .search-filters .container {
-                  display: flex !important;
-                  justify-content: center !important;
-                  }
-                  .filter-box {
-                  width: 100% !important;
-                  max-width: 800px !important;
-                  }
-                  .filter-box form {
-                  display: flex !important;
-                  justify-content: center !important;
-                  align-items: center !important;
-                  gap: 10px !important;
-                  flex-wrap: wrap !important;
-                  }
-                  @media (max-width: 768px) {
-                  .filter-box form {
-                  flex-direction: column !important;
-                  gap: 15px !important;
-                  }
-                  .form-control {
-                  width: 100% !important;
-                  max-width: 300px !important;
-                  }
-                  }
-               </style>
-               <!-- End: Search Section -->
                <div class="row">
                   <div class="col-md-9 col-md-push-3 news-events-list-view">
                      <div class="news-list-box">
@@ -77,7 +45,6 @@
                            @foreach($events as $index => $event)
                            <div class="event-card {{ $index % 2 == 0 ? 'image-left' : 'image-right' }}">
                               @if($index % 2 == 0)
-                              <!-- Left image layout -->
                               <div class="event-image">
                                  <img src="{{ asset('storage/' . $event->image) }}" alt="Event Image" style="width: 385px; height: 444px; object-fit: cover;">
                               </div>
@@ -112,7 +79,6 @@
                                  </div>
                               </div>
                               @else
-                              <!-- Right image layout -->
                               <div class="event-content">
                                  <div class="event-category">
                                     <span class="arrow-right"></span>
@@ -163,7 +129,6 @@
                                  <i class="fa fa-long-arrow-left"></i> Previous
                                  </a>
                                  @endif
-                                 {{-- Page Numbers --}}
                                  @foreach($events->getUrlRange(1, $events->lastPage()) as $page => $url)
                                  @if ($page == $events->currentPage())
                                  <span class="page-numbers current">{{ $page }}</span>
@@ -171,7 +136,6 @@
                                  <a class="page-numbers" href="{{ $url }}">{{ $page }}</a>
                                  @endif
                                  @endforeach
-                                 {{-- Next Page Link --}}
                                  @if($events->hasMorePages())
                                  <a class="next page-numbers" href="{{ $events->nextPageUrl() }}">
                                  Next <i class="fa fa-long-arrow-right"></i>
@@ -189,6 +153,38 @@
                   </div>
                </div>
       </main>
+      <style>
+          <style>
+                  .search-filters {
+                  text-align: center !important;
+                  }
+                  .search-filters .container {
+                  display: flex !important;
+                  justify-content: center !important;
+                  }
+                  .filter-box {
+                  width: 100% !important;
+                  max-width: 800px !important;
+                  }
+                  .filter-box form {
+                  display: flex !important;
+                  justify-content: center !important;
+                  align-items: center !important;
+                  gap: 10px !important;
+                  flex-wrap: wrap !important;
+                  }
+                  @media (max-width: 768px) {
+                  .filter-box form {
+                  flex-direction: column !important;
+                  gap: 15px !important;
+                  }
+                  .form-control {
+                  width: 100% !important;
+                  max-width: 300px !important;
+                  }
+                  }
+               </style>
+      </style>
       </div>
       </div>
       @include('user.footer')

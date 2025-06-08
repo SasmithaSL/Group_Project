@@ -3,7 +3,6 @@
    @include('admin.head')
    <body>
       <div class="container-scroller">
-         <!-- partial:partials/_sidebar.html -->
          <nav class="sidebar sidebar-offcanvas" id="sidebar">
             <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
                <a class="sidebar-brand brand-logo" href="index"><img src="/admin/assets/images/logo.png" alt="logo" /></a>
@@ -11,19 +10,14 @@
             </div>
             @include('admin.sidebar')
          </nav>
-         <!-- partial -->
          <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_navbar.html -->
             @include('admin.navbar')
-            <!-- partial -->
             <div class="main-panel">
-               <!-- resources\views\admin\index.blade.php -->
                <div class="content-wrapper">
                   <div class="row">
                      <div class="col-md-12 grid-margin">
                      </div>
                   </div>
-                  <!-- Statistics Cards Row -->
                   <div class="row">
                      <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                         <div class="card">
@@ -106,7 +100,6 @@
                         </div>
                      </div>
                   </div>
-                  <!-- Statistics Row -->
                   <div class="row">
                      <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
                         <div class="card">
