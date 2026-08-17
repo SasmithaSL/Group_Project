@@ -164,5 +164,19 @@
          }
       </style>
       @include('user.footer')
+      <script>
+         document.addEventListener('DOMContentLoaded', function() {
+             const popup = document.getElementById('success-popup');
+             if (!popup) return;
+
+             setTimeout(function() {
+                 popup.style.transition = 'opacity 0.5s ease';
+                 popup.style.opacity = '0';
+                 setTimeout(function() {
+                     popup.remove();
+                 }, 500);
+             }, 3500);
+         });
+      </script>
    </body>
 </html>

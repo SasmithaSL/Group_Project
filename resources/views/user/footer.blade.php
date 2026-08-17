@@ -34,12 +34,12 @@
                   <span class="underline left"></span>
                   <div class="menu-quick-links-container">
                      <ul id="menu-quick-links" class="menu">
-                        <li><a href="#">Home </a></li>
-                        <li><a href="#">Books & Media </a></li>
-                        <li><a href="/cart">Cart</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{ url('/') }}">Home </a></li>
+                        <li><a href="{{ route('books-media') }}">Books &amp; Media </a></li>
+                        <li><a href="{{ route('cart.view') }}">Cart</a></li>
+                        <li><a href="{{ route('checkout') }}">Checkout</a></li>
+                        <li><a href="{{ route('services') }}">Services</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
                      </ul>
                   </div>
                </div>

@@ -94,8 +94,8 @@
                         style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px;">&times;</button>
                      <h3 class="text-center">Confirm Book Request</h3>
                      <div id="bookList" style="margin-top: 15px;"></div>
-                     <div style="text-align: center; margin-top: 15px;">
-                        <button id="placeOrderBtn" class="read-more-btn">Submit Request</button>
+                     <div style="display: flex; justify-content: center; margin-top: 15px;">
+                        <button id="placeOrderBtn" class="read-more-btn" style="align-self: center;">Submit Request</button>
                      </div>
                      <div id="loading" style="display:none; text-align: center; margin-top: 20px;">
                         <i class="fas fa-spinner fa-spin"></i> Processing your request...
@@ -104,7 +104,7 @@
                         <i class="fas fa-check-circle" style="color: green; font-size: 24px;"></i>
                         <p style="margin-top: 10px; color: green;">Your book request has been submitted successfully!</p>
                         <p style="color: #666; font-size: 14px;">The admin will review your request and you'll be notified once it's approved.</p>
-                        <button id="okBtn" class="read-more-btn" style="margin-top: 15px;">OK</button>
+                        <button id="okBtn" class="read-more-btn" style="margin-top: 15px; align-self: center;">OK</button>
                      </div>
                   </div>
                </div>
@@ -159,7 +159,7 @@
                         bookList.appendChild(bookItem);
                     });
             
-                    checkoutModal.style.display = 'block';
+                    checkoutModal.style.display = 'flex';
                 });
             
                 closeModalBtn.addEventListener('click', function() {

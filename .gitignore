@@ -1,4 +1,7 @@
 /.phpunit.cache
+/laravel
+*.sqlite
+*.sqlite3
 /node_modules
 /public/build
 /public/hot

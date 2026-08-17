@@ -238,7 +238,7 @@
                </li>
             </ul>
             <div class="center-content">
-               <a href="#" class="btn btn-primary">View More</a>
+               <a href="{{ route('books-media') }}" class="btn btn-primary">View More</a>
             </div>
             <div class="clearfix"></div>
          </div>
@@ -282,7 +282,7 @@
                         </ul>
                         <h3><a href=".html#">Kids' Adventure Reading Challenge</a></h3>
                         <p>Join us for an exciting day of adventure and discovery! Our Kids' Adventure Reading Challenge will inspire young minds to explore thrilling tales and embark on imaginative journeys through books. From dragons to superheroes, this event promises endless excitement for kids of all ages.</p>
-                        <a class="btn btn-primary" href="#">Read More</a>
+                        <a class="btn btn-primary" href="{{ route('news-events') }}">Read More</a>
                      </div>
                   </div>
                   <div class="clearfix"></div>
@@ -313,7 +313,7 @@
                         </ul>
                         <h3><a href=".html#">The Future of Digital Libraries</a></h3>
                         <p>Explore the evolution of digital libraries and how technology is transforming the way we access and share knowledge. </p>
-                        <a class="btn btn-primary" href="#">Read More</a>
+                        <a class="btn btn-primary" href="{{ route('news-events') }}">Read More</a>
                      </div>
                   </div>
                   <div class="clearfix"></div>
